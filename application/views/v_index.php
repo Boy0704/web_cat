@@ -1,124 +1,160 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Cek Jantung | Aplikasi</title>
-    <base href="<?php echo base_url() ?>">
-    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
-    <!-- Bootstrap 3.3.2 -->
-    <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />    
-    <!-- FontAwesome 4.3.0 -->
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-    <!-- Ionicons 2.0.0 -->
-    <link href="http://code.ionicframework.com/ionicons/2.0.0/css/ionicons.min.css" rel="stylesheet" type="text/css" />    
-    <!-- Theme style -->
-    <link href="assets/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
-    <!-- AdminLTE Skins. Choose a skin from the css/skins 
-         folder instead of downloading all of them to reduce the load. -->
-    <link href="assets/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
-    <!-- iCheck -->
-    <link href="assets/plugins/iCheck/flat/blue.css" rel="stylesheet" type="text/css" />
-    <!-- Morris chart -->
-    <link href="assets/plugins/morris/morris.css" rel="stylesheet" type="text/css" />
-    <!-- jvectormap -->
-    <link href="assets/plugins/jvectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
-    <!-- Date Picker -->
-    <link href="assets/plugins/datepicker/datepicker3.css" rel="stylesheet" type="text/css" />
-    <!-- Daterange picker -->
-    <link href="assets/plugins/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
-    <!-- bootstrap wysihtml5 - text editor -->
-    <link href="assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />
+<html lang="en">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-    <![endif]-->
-  </head>
-  <body class="skin-blue">
-    <div class="wrapper">
-      
-      <?php $this->load->view('page/header') ?>
-      <!-- Left side column. contains the logo and sidebar -->
-      <?php $this->load->view('page/aside') ?>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="Boy Kurniawan">
+  <meta name="keyword" content="aplikasi CAT">
+  <title>Ujian - CAT</title>
+  <base href="<?php echo base_url() ?>">
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
-      <!-- Right side column. Contains the navbar and content of the page -->
-      <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-          <h1>
-          <?php echo $judul_page ?>
-            <small> </small>
-          </h1>
-          <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active"><?php echo $judul_page ?></li>
-          </ol>
-        </section>
+  <!-- Bootstrap core CSS -->
+  <link href="assets/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!--external css-->
+  <link href="assets/lib/font-awesome/css/font-awesome.css" rel="stylesheet" />
+  <link rel="stylesheet" type="text/css" href="assets/css/zabuto_calendar.css">
+  <link rel="stylesheet" type="text/css" href="assets/lib/gritter/css/jquery.gritter.css" />
+  <!-- Custom styles for this template -->
+  <link href="assets/css/style.css" rel="stylesheet">
+  <link href="assets/css/style-responsive.css" rel="stylesheet">
+  <script src="assets/lib/chart-master/Chart.js"></script>
 
-        <!-- Main content -->
-        <section class="content">
-          <!-- Small boxes (Stat box) -->
-          <div class="box">
-            <div class="box-header">
-              <h3 class="box-title"></h3>
+  <!-- =======================================================
+    Template Name: Dashio
+    Template URL: https://templatemag.com/dashio-bootstrap-admin-template/
+    Author: TemplateMag.com
+    License: https://templatemag.com/license/
+  ======================================================= -->
+</head>
+
+<body>
+  <section id="container">
+    <!-- **********************************************************************************************************************************************************
+        TOP BAR CONTENT & NOTIFICATIONS
+        *********************************************************************************************************************************************************** -->
+    <!--header start-->
+    <?php $this->load->view('page/header'); ?>
+    <!--header end-->
+    <!-- **********************************************************************************************************************************************************
+        MAIN SIDEBAR MENU
+        *********************************************************************************************************************************************************** -->
+    <!--sidebar start-->
+    <?php $this->load->view('page/side'); ?>
+    <!--sidebar end-->
+    <!-- **********************************************************************************************************************************************************
+        MAIN CONTENT
+        *********************************************************************************************************************************************************** -->
+    <!--main content start-->
+    <section id="main-content">
+      <section class="wrapper">
+        <!-- <h3><i class="fa fa-angle-right"></i> <?php echo $judul_page ?></h3> -->
+        <br>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="content-panel">
+              <h4><i class="fa fa-angle-right"></i> <?php echo $judul_page ?></h4>
+              <hr>
+              <div style="margin-left: 10px; margin-right: 10px;">
+              <?php $this->load->view($konten); ?>
+              </div>
+              
             </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-            <?php $this->load->view($konten) ?>
-                
-            </div>
-            <!-- /.box-body -->
           </div>
+          <!-- /col-md-12 -->
           
-          <!-- Main row -->
-          
+          <!-- /col-md-12 -->
+        </div>
+        <!-- row -->
+        <!-- /row -->
+      </section>
+    </section>
+    <!--main content end-->
+    <!--footer start-->
+    <?php $this->load->view('page/footer'); ?>
+    <!--footer end-->
+  </section>
+  <!-- js placed at the end of the document so the pages load faster -->
+  <script src="assets/lib/jquery/jquery.min.js"></script>
 
-        </section><!-- /.content -->
-      </div><!-- /.content-wrapper -->
-      <?php $this->load->view('page/footer') ?>
-    </div><!-- ./wrapper -->
+  <script src="assets/lib/bootstrap/js/bootstrap.min.js"></script>
+  <script class="include" type="text/javascript" src="assets/lib/jquery.dcjqaccordion.2.7.js"></script>
+  <script src="assets/lib/jquery.scrollTo.min.js"></script>
+  <script src="assets/lib/jquery.nicescroll.js" type="text/javascript"></script>
+  <script src="assets/lib/jquery.sparkline.js"></script>
+  <!--common script for all pages-->
+  <script src="assets/lib/common-scripts.js"></script>
+  <script type="text/javascript" src="assets/lib/gritter/js/jquery.gritter.js"></script>
+  <script type="text/javascript" src="assets/lib/gritter-conf.js"></script>
+  <!--script for this page-->
+  <script src="assets/lib/sparkline-chart.js"></script>
+  <script src="assets/lib/zabuto_calendar.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      var unique_id = $.gritter.add({
+        // (string | mandatory) the heading of the notification
+        title: 'Welcome to Dashio!',
+        // (string | mandatory) the text inside the notification
+        text: 'Hover me to enable the Close Button. You can hide the left sidebar clicking on the button next to the logo.',
+        // (string | optional) the image to display on the left
+        image: 'img/ui-sam.jpg',
+        // (bool | optional) if you want it to fade out on its own or just sit there
+        sticky: false,
+        // (int | optional) the time you want it to be alive for before fading out
+        time: 8000,
+        // (string | optional) the class name you want to apply to that specific message
+        class_name: 'my-sticky-class'
+      });
 
-    <!-- jQuery 2.1.3 -->
-    <script src="assets/plugins/jQuery/jQuery-2.1.3.min.js"></script>
-    <!-- jQuery UI 1.11.2 -->
-    <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.min.js" type="text/javascript"></script>
-    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-    <script>
-      $.widget.bridge('uibutton', $.ui.button);
-    </script>
-    <!-- Bootstrap 3.3.2 JS -->
-    <script src="assets/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>    
-    <!-- Morris.js charts -->
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-    <script src="assets/plugins/morris/morris.min.js" type="text/javascript"></script>
-    <!-- Sparkline -->
-    <script src="assets/plugins/sparkline/jquery.sparkline.min.js" type="text/javascript"></script>
-    <!-- jvectormap -->
-    <script src="assets/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js" type="text/javascript"></script>
-    <script src="assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js" type="text/javascript"></script>
-    <!-- jQuery Knob Chart -->
-    <script src="assets/plugins/knob/jquery.knob.js" type="text/javascript"></script>
-    <!-- daterangepicker -->
-    <script src="assets/plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
-    <!-- datepicker -->
-    <script src="assets/plugins/datepicker/bootstrap-datepicker.js" type="text/javascript"></script>
-    <!-- Bootstrap WYSIHTML5 -->
-    <script src="assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js" type="text/javascript"></script>
-    <!-- iCheck -->
-    <script src="assets/plugins/iCheck/icheck.min.js" type="text/javascript"></script>
-    <!-- Slimscroll -->
-    <script src="assets/plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
-    <!-- FastClick -->
-    <script src='assets/plugins/fastclick/fastclick.min.js'></script>
-    <!-- AdminLTE App -->
-    <script src="assets/dist/js/app.min.js" type="text/javascript"></script>
+      return false;
+    });
+  </script>
+  <script type="application/javascript">
+    $(document).ready(function() {
+      $("#date-popover").popover({
+        html: true,
+        trigger: "manual"
+      });
+      $("#date-popover").hide();
+      $("#date-popover").click(function(e) {
+        $(this).hide();
+      });
 
-    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script src="assets/dist/js/pages/dashboard.js" type="text/javascript"></script>
+      $("#my-calendar").zabuto_calendar({
+        action: function() {
+          return myDateFunction(this.id, false);
+        },
+        action_nav: function() {
+          return myNavFunction(this.id);
+        },
+        ajax: {
+          url: "show_data.php?action=1",
+          modal: true
+        },
+        legend: [{
+            type: "text",
+            label: "Special event",
+            badge: "00"
+          },
+          {
+            type: "block",
+            label: "Regular event",
+          }
+        ]
+      });
+    });
 
-    <!-- AdminLTE for demo purposes -->
-    <script src="assets/dist/js/demo.js" type="text/javascript"></script>
-  </body>
+    function myNavFunction(id) {
+      $("#date-popover").hide();
+      var nav = $("#" + id).data("navigation");
+      var to = $("#" + id).data("to");
+      console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
+    }
+  </script>
+</body>
+
 </html>
