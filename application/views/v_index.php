@@ -93,6 +93,9 @@
   <!--script for this page-->
   <script src="assets/lib/sparkline-chart.js"></script>
   <script src="assets/lib/zabuto_calendar.js"></script>
+  <?php 
+  if ($this->uri->segment(1) == '') {
+  ?>
   <script type="text/javascript">
     $(document).ready(function() {
       var unique_id = $.gritter.add({
@@ -113,6 +116,7 @@
       return false;
     });
   </script>
+  <?php } ?>
   <script type="application/javascript">
     $(document).ready(function() {
       $("#date-popover").popover({
