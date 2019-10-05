@@ -50,7 +50,7 @@ class Siswa extends CI_Controller
         $row = $this->Siswa_model->get_by_id($id);
         if ($row) {
             $data = array(
-		'id_siswa' => $row->id_siswa,
+		'user_id' => $row->user_id,
 		'nama_lengkap' => $row->nama_lengkap,
 		'email' => $row->email,
 		'no_hp' => $row->no_hp,
@@ -72,7 +72,7 @@ class Siswa extends CI_Controller
             'konten' => 'siswa/siswa_form',
             'button' => 'Create',
             'action' => site_url('siswa/create_action'),
-	    'id_siswa' => set_value('id_siswa'),
+	    'user_id' => set_value('user_id'),
 	    'nama_lengkap' => set_value('nama_lengkap'),
 	    'email' => set_value('email'),
 	    'no_hp' => set_value('no_hp'),
@@ -115,7 +115,7 @@ class Siswa extends CI_Controller
                 'konten' => 'siswa/siswa_form',
                 'button' => 'Update',
                 'action' => site_url('siswa/update_action'),
-		'id_siswa' => set_value('id_siswa', $row->id_siswa),
+		'user_id' => set_value('user_id', $row->user_id),
 		'nama_lengkap' => set_value('nama_lengkap', $row->nama_lengkap),
 		'email' => set_value('email', $row->email),
 		'no_hp' => set_value('no_hp', $row->no_hp),
@@ -146,7 +146,7 @@ class Siswa extends CI_Controller
 		'password' => $this->input->post('password',TRUE),
 	    );
 
-            $this->Siswa_model->update($this->input->post('id_siswa', TRUE), $data);
+            $this->Siswa_model->update($this->input->post('user_id', TRUE), $data);
             $this->session->set_flashdata('message', 'Update Record Success');
             redirect(site_url('siswa'));
         }
@@ -175,7 +175,7 @@ class Siswa extends CI_Controller
 	$this->form_validation->set_rules('username', 'username', 'trim|required');
 	$this->form_validation->set_rules('password', 'password', 'trim|required');
 
-	$this->form_validation->set_rules('id_siswa', 'id_siswa', 'trim');
+	$this->form_validation->set_rules('user_id', 'user_id', 'trim');
 	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }
 

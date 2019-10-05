@@ -49,9 +49,9 @@
 			<td><?php echo $guru->alamat ?></td>
 			<td style="text-align:center" width="200px">
 				<?php 
-				echo anchor(site_url('guru/update/'.$guru->id_guru),'<span class="label label-info">Ubah</span>'); 
+				echo anchor(site_url('guru/update/'.$guru->user_id),'<span class="label label-info">Ubah</span>'); 
 				echo ' | '; 
-				echo anchor(site_url('guru/delete/'.$guru->id_guru),'<span class="label label-danger">Hapus</span>','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'); 
+				echo anchor(site_url('guru/delete/'.$guru->user_id),'<span class="label label-danger">Hapus</span>','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'); 
 				?>
 			</td>
 		</tr>

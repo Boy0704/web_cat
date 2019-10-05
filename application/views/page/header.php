@@ -9,7 +9,7 @@
         <!--  notification start -->
         <ul class="nav top-menu">
           <!-- settings start -->
-          <li class="dropdown">
+         <!--  <li class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
               <i class="fa fa-tasks"></i>
               <span class="badge bg-theme">4</span>
@@ -75,10 +75,10 @@
                 <a href="#">See All Tasks</a>
               </li>
             </ul>
-          </li>
+          </li> -->
           <!-- settings end -->
           <!-- inbox dropdown start-->
-          <li id="header_inbox_bar" class="dropdown">
+          <!-- <li id="header_inbox_bar" class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
               <i class="fa fa-envelope-o"></i>
               <span class="badge bg-theme">5</span>
@@ -140,10 +140,10 @@
                 <a href="index.html#">See all messages</a>
               </li>
             </ul>
-          </li>
+          </li> -->
           <!-- inbox dropdown end -->
           <!-- notification dropdown start-->
-          <li id="header_notification_bar" class="dropdown">
+          <!-- <li id="header_notification_bar" class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
               <i class="fa fa-bell-o"></i>
               <span class="badge bg-warning">7</span>
@@ -185,7 +185,7 @@
                 <a href="index.html#">See all notifications</a>
               </li>
             </ul>
-          </li>
+          </li> -->
           <!-- notification dropdown end -->
         </ul>
         <!--  notification end -->

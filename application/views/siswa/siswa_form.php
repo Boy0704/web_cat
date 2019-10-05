@@ -22,7 +22,7 @@
         </div>
 	    <div class="form-group">
             <label for="varchar">Password <?php echo form_error('password') ?></label>
-            <input type="text" class="form-control" name="password" id="password" placeholder="Password" value="<?php echo $password; ?>" />
+            <input type="password" class="form-control" name="password" id="password" placeholder="Password" value="<?php echo $password; ?>" />
         </div>
 	    <input type="hidden" name="id_siswa" value="<?php echo $id_siswa; ?>" /> 
 	    <button type="submit" class="btn btn-primary"><?php echo $button ?></button> 

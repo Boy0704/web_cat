@@ -23,7 +23,7 @@
               </a>
           </li>
           <li>
-            <a href="#">
+            <a href="mapel">
               <i class="fa fa-paste"></i>
               <span>Mata Pelajaran</span>
               </a>
@@ -53,7 +53,7 @@
               </a>
           </li>
           <li>
-            <a href="#">
+            <a href="Pengaturan">
               <i class="fa fa-suitcase"></i>
               <span>Pengaturan</span>
               </a>

@@ -22,9 +22,9 @@
         </div>
 	    <div class="form-group">
             <label for="varchar">Password <?php echo form_error('password') ?></label>
-            <input type="text" class="form-control" name="password" id="password" placeholder="Password" value="<?php echo $password; ?>" />
+            <input type="password" class="form-control" name="password" id="password" placeholder="Password" value="<?php echo $password; ?>" />
         </div>
-	    <input type="hidden" name="id_guru" value="<?php echo $id_guru; ?>" /> 
+	    <input type="hidden" name="user_id" value="<?php echo $user_id; ?>" /> 
 	    <button type="submit" class="btn btn-primary"><?php echo $button ?></button> 
 	    <a href="<?php echo site_url('guru') ?>" class="btn btn-default">Cancel</a>
 	</form>

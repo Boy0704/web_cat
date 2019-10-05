@@ -72,7 +72,7 @@ class Guru extends CI_Controller
             'konten' => 'guru/guru_form',
             'button' => 'Create',
             'action' => site_url('guru/create_action'),
-	    'id_guru' => set_value('id_guru'),
+	    'user_id' => set_value('user_id'),
 	    'nama_lengkap' => set_value('nama_lengkap'),
 	    'email' => set_value('email'),
 	    'no_hp' => set_value('no_hp'),
@@ -115,7 +115,7 @@ class Guru extends CI_Controller
                 'konten' => 'guru/guru_form',
                 'button' => 'Update',
                 'action' => site_url('guru/update_action'),
-		'id_guru' => set_value('id_guru', $row->id_guru),
+		'user_id' => set_value('user_id', $row->user_id),
 		'nama_lengkap' => set_value('nama_lengkap', $row->nama_lengkap),
 		'email' => set_value('email', $row->email),
 		'no_hp' => set_value('no_hp', $row->no_hp),
@@ -135,7 +135,7 @@ class Guru extends CI_Controller
         $this->_rules();
 
         if ($this->form_validation->run() == FALSE) {
-            $this->update($this->input->post('id_guru', TRUE));
+            $this->update($this->input->post('user_id', TRUE));
         } else {
             $data = array(
 		'nama_lengkap' => $this->input->post('nama_lengkap',TRUE),
@@ -146,7 +146,7 @@ class Guru extends CI_Controller
 		'password' => $this->input->post('password',TRUE),
 	    );
 
-            $this->Guru_model->update($this->input->post('id_guru', TRUE), $data);
+            $this->Guru_model->update($this->input->post('user_id', TRUE), $data);
             $this->session->set_flashdata('message', 'Update Record Success');
             redirect(site_url('guru'));
         }
@@ -175,7 +175,7 @@ class Guru extends CI_Controller
 	$this->form_validation->set_rules('username', 'username', 'trim|required');
 	$this->form_validation->set_rules('password', 'password', 'trim|required');
 
-	$this->form_validation->set_rules('id_guru', 'id_guru', 'trim');
+	$this->form_validation->set_rules('user_id', 'user_id', 'trim');
 	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }
 

@@ -1,7 +1,7 @@
 <footer class="site-footer">
       <div class="text-center">
         <p>
-          &copy; Copyrights <strong> Jualkoding.com</strong>. All Rights Reserved
+          &copy; Copyrights <strong> <a href="https://jualkoding.com/" target="_blank">Jualkoding.com</a></strong>. All Rights Reserved
         </p>
         <div class="credits">
           <!--

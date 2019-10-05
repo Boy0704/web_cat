@@ -6,8 +6,8 @@ if (!defined('BASEPATH'))
 class Guru_model extends CI_Model
 {
 
-    public $table = 'guru';
-    public $id = 'id_guru';
+    public $table = 'user';
+    public $id = 'user_id';
     public $order = 'DESC';
 
     function __construct()
@@ -31,7 +31,7 @@ class Guru_model extends CI_Model
     
     // get total rows
     function total_rows($q = NULL) {
-        $this->db->like('id_guru', $q);
+        $this->db->like('user_id', $q);
 	$this->db->or_like('nama_lengkap', $q);
 	$this->db->or_like('email', $q);
 	$this->db->or_like('no_hp', $q);
@@ -45,7 +45,7 @@ class Guru_model extends CI_Model
     // get data with limit and search
     function get_limit_data($limit, $start = 0, $q = NULL) {
         $this->db->order_by($this->id, $this->order);
-        $this->db->like('id_guru', $q);
+        $this->db->like('user_id', $q);
 	$this->db->or_like('nama_lengkap', $q);
 	$this->db->or_like('email', $q);
 	$this->db->or_like('no_hp', $q);
@@ -53,6 +53,7 @@ class Guru_model extends CI_Model
 	$this->db->or_like('username', $q);
 	$this->db->or_like('password', $q);
 	$this->db->limit($limit, $start);
+    // $this->db->where('akses','guru');
         return $this->db->get($this->table)->result();
     }
 
