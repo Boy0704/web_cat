@@ -15,8 +15,107 @@ class App extends CI_Controller {
 		);
 		$this->load->view('v_index', $data);
     }
+
+    public function list_batch()
+    {
+    	$userid = 1;
+    	$data = array(
+    		'userid' => $userid,
+    		'query' => $this->db->get('batch'),
+    		'judul_page' => 'List Batch',
+            'konten' => 'soal_siswa/list_batch',
+    	);
+    	$this->load->view('v_index', $data);
+    }
+
+    public function paket_soal($batch_id)
+    {
+    	$userid = 1;
+    	$data = array(
+    		'userid' => $userid,
+    		'query' => $this->db->get_where('paket_soal', array('batch_id'=>base64_decode($batch_id))),
+    		'judul_page' => 'Paket Soal',
+            'konten' => 'soal_siswa/paket_soal',
+    	);
+    	$this->load->view('v_index', $data);
+    }
+
+    public function list_soal($paket_soal_id)
+    {
+    	$userid = 1;
+    	$paket_soal_id = base64_decode($paket_soal_id);
+    	$data = array(
+    		'userid' => $userid,
+    		'query' => $this->db->query("SELECT soal.soal,soal.soal_id FROM item_soal,soal where item_soal.soal_id=soal.soal_id and item_soal.paket_soal_id='$paket_soal_id' "),
+    		'judul_page' => 'List Soal',
+            'konten' => 'soal_siswa/list_soal',
+    	);
+    	$this->load->view('v_index', $data);
+    }
     
-    
+    public function soal_siswa($soal_id)
+    {
+    	$userid = 1;
+    	$this->db->order_by('butir_soal_id', 'RANDOM');
+    	$this->db->select('butir_soal_id');
+    	$data = array(
+    		'userid' => $userid,
+    		'jumlah_soal' => $this->db->get_where('butir_soal',array('soal_id'=>$soal_id)),
+    		'judul_page' => 'Soal Ujian',
+            'konten' => 'soal_siswa/soal',
+    	);
+    	$this->load->view('v_index', $data);
+    }
+
+    public function ambil_soal_ujian($butir_soal_id)
+    {
+    	$ambil = $this->db->get_where('butir_soal', array('butir_soal_id'=>$butir_soal_id))->row();
+    	?>
+    	<div>
+    		<?php echo $ambil->pertanyaan ?>
+    	</div>
+    	<div>
+    		<form>
+    			<?php 
+    			if ($ambil->jawaban1 == '') { } else {
+    			?>
+    			<div class="radio">
+			      <label><input type="radio" name="jwb" nilai="<?php echo $ambil->bobot_jawaban1 ?>" ><?php echo $ambil->jawaban1 ?></label>
+			    </div>
+				<?php } ?>
+				<?php 
+    			if ($ambil->jawaban2 == '') { } else {
+    			?>
+    			<div class="radio">
+			      <label><input type="radio" name="jwb" nilai="<?php echo $ambil->bobot_jawaban2 ?>" ><?php echo $ambil->jawaban2 ?></label>
+			    </div>
+				<?php } ?>
+				<?php 
+    			if ($ambil->jawaban3 == '') { } else {
+    			?>
+    			<div class="radio">
+			      <label><input type="radio" name="jwb" nilai="<?php echo $ambil->bobot_jawaban3 ?>" ><?php echo $ambil->jawaban3 ?></label>
+			    </div>
+				<?php } ?>
+				<?php 
+    			if ($ambil->jawaban4 == '') { } else {
+    			?>
+    			<div class="radio">
+			      <label><input type="radio" name="jwb" nilai="<?php echo $ambil->bobot_jawaban4 ?>" ><?php echo $ambil->jawaban4 ?></label>
+			    </div>
+				<?php } ?>
+				<?php 
+    			if ($ambil->jawaban5 == '') { } else {
+    			?>
+    			<div class="radio">
+			      <label><input type="radio" name="jwb" nilai="<?php echo $ambil->bobot_jawaban5 ?>" ><?php echo $ambil->jawaban5 ?></label>
+			    </div>
+				<?php } ?>
+				
+			</form>
+    	</div>
+    	<?php
+    }
 
 	public function login() 
 	{

@@ -29,6 +29,12 @@
               </a>
           </li>
           <li>
+            <a href="batch">
+              <i class="fa fa-paperclip"></i>
+              <span>Batch Soal</span>
+              </a>
+          </li>
+          <li>
             <a href="#">
               <i class="fa fa-paperclip"></i>
               <span>Paket Soal</span>
