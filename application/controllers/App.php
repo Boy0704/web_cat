@@ -67,53 +67,61 @@ class App extends CI_Controller {
     	$this->load->view('v_index', $data);
     }
 
-    public function ambil_soal_ujian($butir_soal_id)
+    public function ambil_soal_ujian($butir_soal_id, $no_soal)
     {
     	$ambil = $this->db->get_where('butir_soal', array('butir_soal_id'=>$butir_soal_id))->row();
     	?>
-    	<div>
-    		<?php echo $ambil->pertanyaan ?>
+    	<div style="font-size: 12pt; font-family: Arial">
+    		<div  style="float: left; margin-right: 5px;">
+    			<b><?php echo $no_soal ?>. </b>
+    		</div>
+    		<div>
+    			<div>
+		    		<?php echo $ambil->pertanyaan ?>
+		    	</div><br>
+		    	<div>
+		    		<form>
+		    			<?php 
+		    			if ($ambil->jawaban1 == '') { } else {
+		    			?>
+		    			<div class="radio">
+					      <label><input type="radio" name="jwb" nilai="<?php echo $ambil->bobot_jawaban1 ?>" ><?php echo $ambil->jawaban1 ?></label>
+					    </div>
+						<?php } ?>
+						<?php 
+		    			if ($ambil->jawaban2 == '') { } else {
+		    			?>
+		    			<div class="radio">
+					      <label><input type="radio" name="jwb" nilai="<?php echo $ambil->bobot_jawaban2 ?>" ><?php echo $ambil->jawaban2 ?></label>
+					    </div>
+						<?php } ?>
+						<?php 
+		    			if ($ambil->jawaban3 == '') { } else {
+		    			?>
+		    			<div class="radio">
+					      <label><input type="radio" name="jwb" nilai="<?php echo $ambil->bobot_jawaban3 ?>" ><?php echo $ambil->jawaban3 ?></label>
+					    </div>
+						<?php } ?>
+						<?php 
+		    			if ($ambil->jawaban4 == '') { } else {
+		    			?>
+		    			<div class="radio">
+					      <label><input type="radio" name="jwb" nilai="<?php echo $ambil->bobot_jawaban4 ?>" ><?php echo $ambil->jawaban4 ?></label>
+					    </div>
+						<?php } ?>
+						<?php 
+		    			if ($ambil->jawaban5 == '') { } else {
+		    			?>
+		    			<div class="radio">
+					      <label><input type="radio" name="jwb" nilai="<?php echo $ambil->bobot_jawaban5 ?>" ><?php echo $ambil->jawaban5 ?></label>
+					    </div>
+						<?php } ?>
+						
+					</form>
+		    	</div>
+    		</div>
     	</div>
-    	<div>
-    		<form>
-    			<?php 
-    			if ($ambil->jawaban1 == '') { } else {
-    			?>
-    			<div class="radio">
-			      <label><input type="radio" name="jwb" nilai="<?php echo $ambil->bobot_jawaban1 ?>" ><?php echo $ambil->jawaban1 ?></label>
-			    </div>
-				<?php } ?>
-				<?php 
-    			if ($ambil->jawaban2 == '') { } else {
-    			?>
-    			<div class="radio">
-			      <label><input type="radio" name="jwb" nilai="<?php echo $ambil->bobot_jawaban2 ?>" ><?php echo $ambil->jawaban2 ?></label>
-			    </div>
-				<?php } ?>
-				<?php 
-    			if ($ambil->jawaban3 == '') { } else {
-    			?>
-    			<div class="radio">
-			      <label><input type="radio" name="jwb" nilai="<?php echo $ambil->bobot_jawaban3 ?>" ><?php echo $ambil->jawaban3 ?></label>
-			    </div>
-				<?php } ?>
-				<?php 
-    			if ($ambil->jawaban4 == '') { } else {
-    			?>
-    			<div class="radio">
-			      <label><input type="radio" name="jwb" nilai="<?php echo $ambil->bobot_jawaban4 ?>" ><?php echo $ambil->jawaban4 ?></label>
-			    </div>
-				<?php } ?>
-				<?php 
-    			if ($ambil->jawaban5 == '') { } else {
-    			?>
-    			<div class="radio">
-			      <label><input type="radio" name="jwb" nilai="<?php echo $ambil->bobot_jawaban5 ?>" ><?php echo $ambil->jawaban5 ?></label>
-			    </div>
-				<?php } ?>
-				
-			</form>
-    	</div>
+    	
     	<?php
     }
 
@@ -138,33 +146,24 @@ class App extends CI_Controller {
 			$this->load->view('login');
 		} else {
 			$username = $this->input->post('username');
-			$password = $this->input->post('password');
+			$password = md5($this->input->post('password'));
 
-			$hashed = '$2y$10$LO9IzV0KAbocIBLQdgy.oeNDFSpRidTCjXSQPK45ZLI9890g242SG';
-			//$cek_user = $this->db->query("SELECT * FROM users WHERE username='$username' and password='$password' ");
-			if (password_verify($password, $hashed)) {
-				// foreach ($cek_user->result() as $row) {
+			// $hashed = '$2y$10$LO9IzV0KAbocIBLQdgy.oeNDFSpRidTCjXSQPK45ZLI9890g242SG';
+			$cek_user = $this->db->query("SELECT * FROM user WHERE username='$username' and password='$password' ");
+			// if (password_verify($password, $hashed)) {
+			if ($cek_user->num_rows() > 0) {
+				foreach ($cek_user->result() as $row) {
 					
-                //     if ($row->level == 'dokter') {
-				// 		$d = $this->db->get_where('dokter', array('id_dokter'=>$row->id_x))->row();
-						
-                //         $sess_data['nama'] = $d->nama_lengkap;
-                //         $sess_data['foto'] = $d->foto;
-                //     } else if ($row->level == 'pasien') {
-                //         $d = $this->db->get_where('pasien', array('id_pasien'=>$row->id_x))->row();
-                //         $sess_data['nama'] = $d->nama_lengkap;
-                //         $sess_data['foto'] = $d->foto;
-                //     }
-
-				// 	$sess_data['id_user'] = $row->id_user;
-				// 	$sess_data['username'] = $row->username;
-				// 	$sess_data['level'] = $row->level;
-				// 	$this->session->set_userdata($sess_data);
-				// }
+                    $sess_data['id_user'] = $row->user_id;
+					$sess_data['nama'] = $row->nama_lengkap;
+					$sess_data['username'] = $row->username;
+					$sess_data['level'] = $row->akses;
+					$this->session->set_userdata($sess_data);
+				}
 				// print_r($this->session->userdata());
 				// exit;
-				$sess_data['username'] = $username;
-				$this->session->set_userdata($sess_data);
+				// $sess_data['username'] = $username;
+				// $this->session->set_userdata($sess_data);
 
 				redirect('app/index');
 			} else {
@@ -186,20 +185,12 @@ class App extends CI_Controller {
 		$this->session->unset_userdata('id_user');
 		$this->session->unset_userdata('nama');
 		$this->session->unset_userdata('username');
-		$this->session->unset_userdata('kode_pelanggan');
+		$this->session->unset_userdata('level');
 		session_destroy();
 		redirect('app');
 	}
 
-	function logout_admin()
-	{
-		$this->session->unset_userdata('id_user');
-		$this->session->unset_userdata('nama');
-		$this->session->unset_userdata('username');
-		$this->session->unset_userdata('foto');
-		session_destroy();
-		redirect('app/login');
-	}
+	
 
 	
 }

@@ -96,7 +96,8 @@ class Siswa extends CI_Controller
 		'no_hp' => $this->input->post('no_hp',TRUE),
 		'alamat' => $this->input->post('alamat',TRUE),
 		'username' => $this->input->post('username',TRUE),
-		'password' => $this->input->post('password',TRUE),
+        'password' => md5($this->input->post('password',TRUE)),
+		'akses' => 'siswa',
 	    );
 
             $this->Siswa_model->insert($data);

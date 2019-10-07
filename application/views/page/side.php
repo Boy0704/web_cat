@@ -2,8 +2,8 @@
       <div id="sidebar" class="nav-collapse ">
         <!-- sidebar menu start-->
         <ul class="sidebar-menu" id="nav-accordion">
-          <p class="centered"><a href="profile.html"><img src="assets/img/ui-sam.jpg" class="img-circle" width="80"></a></p>
-          <h5 class="centered">Administrator</h5>
+          <p class="centered"><a href=""><img src="assets/img/user.gif" class="img-circle" width="80"></a></p>
+          <h5 class="centered"><?php echo $this->session->userdata('nama'); ?></h5>
           <li class="mt">
             <a class="active" href="">
               <i class="fa fa-dashboard"></i>

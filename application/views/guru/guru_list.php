@@ -1,7 +1,7 @@
 
         <div class="row" style="margin-bottom: 10px">
             <div class="col-md-4">
-                <?php echo anchor(site_url('guru/create'),'Create', 'class="btn btn-primary"'); ?>
+                <?php echo anchor(site_url('guru/create'),'Tambah Data', 'class="btn btn-primary"'); ?>
             </div>
             <div class="col-md-4 text-center">
                 <div style="margin-top: 8px" id="message">
@@ -11,25 +11,11 @@
             <div class="col-md-1 text-right">
             </div>
             <div class="col-md-3 text-right">
-                <form action="<?php echo site_url('guru/index'); ?>" class="form-inline" method="get">
-                    <div class="input-group">
-                        <input type="text" class="form-control" name="q" value="<?php echo $q; ?>">
-                        <span class="input-group-btn">
-                            <?php 
-                                if ($q <> '')
-                                {
-                                    ?>
-                                    <a href="<?php echo site_url('guru'); ?>" class="btn btn-default">Reset</a>
-                                    <?php
-                                }
-                            ?>
-                          <button class="btn btn-primary" type="submit">Search</button>
-                        </span>
-                    </div>
-                </form>
+                
             </div>
         </div>
-        <table class="table table-bordered" style="margin-bottom: 10px">
+        <table class="table table-bordered tabel-data" style="margin-bottom: 10px">
+            <thead>
             <tr>
                 <th>No</th>
 		<th>Nama Lengkap</th>
@@ -37,7 +23,11 @@
 		<th>No Hp</th>
 		<th>Alamat</th>
 		<th>Action</th>
-            </tr><?php
+            </tr>
+        </thead>
+            <?php
+            $start = 0;
+            $guru_data = $this->db->get_where('user', array('akses'=>'admin'))->result();
             foreach ($guru_data as $guru)
             {
                 ?>
@@ -59,12 +49,5 @@
             }
             ?>
         </table>
-        <div class="row">
-            <div class="col-md-6">
-                <a href="#" class="btn btn-primary">Total Record : <?php echo $total_rows ?></a>
-	    </div>
-            <div class="col-md-6 text-right">
-                <?php echo $pagination ?>
-            </div>
-        </div>
+        
     

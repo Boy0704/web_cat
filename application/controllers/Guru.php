@@ -30,7 +30,7 @@ class Guru extends CI_Controller
         $config['total_rows'] = $this->Guru_model->total_rows($q);
         $guru = $this->Guru_model->get_limit_data($config['per_page'], $start, $q);
 
-        print_r($this->db->last_query());exit;
+        // print_r($this->db->last_query());exit;
 
         $this->load->library('pagination');
         $this->pagination->initialize($config);
@@ -98,7 +98,8 @@ class Guru extends CI_Controller
 		'no_hp' => $this->input->post('no_hp',TRUE),
 		'alamat' => $this->input->post('alamat',TRUE),
 		'username' => $this->input->post('username',TRUE),
-		'password' => $this->input->post('password',TRUE),
+        'password' => md5($this->input->post('password',TRUE)),
+		'akses' => 'admin',
 	    );
 
             $this->Guru_model->insert($data);

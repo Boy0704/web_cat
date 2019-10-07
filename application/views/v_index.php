@@ -19,14 +19,16 @@
   <link href="assets/lib/font-awesome/css/font-awesome.css" rel="stylesheet" />
   <link rel="stylesheet" type="text/css" href="assets/css/zabuto_calendar.css">
   <link rel="stylesheet" type="text/css" href="assets/lib/gritter/css/jquery.gritter.css" />
-  <link href="assets/lib/advanced-datatable/css/demo_page.css" rel="stylesheet" />
-  <link href="assets/lib/advanced-datatable/css/demo_table.css" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/lib/advanced-datatable/css/DT_bootstrap.css" />
+  <!-- <link href="assets/lib/advanced-datatable/css/demo_page.css" rel="stylesheet" /> -->
+  <!-- <link href="assets/lib/advanced-datatable/css/demo_table.css" rel="stylesheet" /> -->
+  <!-- <link rel="stylesheet" href="assets/lib/advanced-datatable/css/DT_bootstrap.css" /> -->
   <!-- Custom styles for this template -->
   <link href="assets/css/style.css" rel="stylesheet">
   <link href="assets/css/style-responsive.css" rel="stylesheet">
   <script src="assets/lib/chart-master/Chart.js"></script>
   <script src="assets/lib/jquery/jquery.min.js"></script>
+  <script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
   <!-- =======================================================
     Template Name: Dashio
     Template URL: https://templatemag.com/dashio-bootstrap-admin-template/
@@ -85,9 +87,9 @@
   </section>
   <!-- js placed at the end of the document so the pages load faster -->
   
-  <script type="text/javascript" language="javascript" src="assets/lib/advanced-datatable/js/jquery.js"></script>
+  <!-- <script type="text/javascript" language="javascript" src="assets/lib/advanced-datatable/js/jquery.js"></script>
   <script type="text/javascript" language="javascript" src="assets/lib/advanced-datatable/js/jquery.dataTables.js"></script>
-  <script type="text/javascript" src="assets/lib/advanced-datatable/js/DT_bootstrap.js"></script>
+  <script type="text/javascript" src="assets/lib/advanced-datatable/js/DT_bootstrap.js"></script> -->
   <script src="assets/lib/bootstrap/js/bootstrap.min.js"></script>
   <script class="include" type="text/javascript" src="assets/lib/jquery.dcjqaccordion.2.7.js"></script>
   <script src="assets/lib/jquery.scrollTo.min.js"></script>
@@ -105,13 +107,14 @@
   ?>
   <script type="text/javascript">
     $(document).ready(function() {
+
       var unique_id = $.gritter.add({
         // (string | mandatory) the heading of the notification
-        title: 'Selamat Datang Administrator!',
+        title: 'Selamat Datang <?php echo $this->session->userdata('nama'); ?> !',
         // (string | mandatory) the text inside the notification
         text: '.',
         // (string | optional) the image to display on the left
-        image: 'assets/img/ui-sam.jpg',
+        image: 'assets/img/user.gif',
         // (bool | optional) if you want it to fade out on its own or just sit there
         sticky: false,
         // (int | optional) the time you want it to be alive for before fading out
@@ -124,6 +127,13 @@
     });
   </script>
   <?php } ?>
+
+  <script>
+  $(document).ready(function(){
+    $('.tabel-data').DataTable();
+});
+  </script>
+
   
 </body>
 
