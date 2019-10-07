@@ -4,6 +4,9 @@
         <ul class="sidebar-menu" id="nav-accordion">
           <p class="centered"><a href=""><img src="assets/img/user.gif" class="img-circle" width="80"></a></p>
           <h5 class="centered"><?php echo $this->session->userdata('nama'); ?></h5>
+          <?php 
+          if ($this->session->userdata('level') == 'admin') {
+            ?>
           <li class="mt">
             <a class="active" href="">
               <i class="fa fa-dashboard"></i>
@@ -71,6 +74,46 @@
               <span>Reset</span>
               </a>
           </li>
+
+            <?php
+          } elseif ($this->session->userdata('level') == 'siswa') {
+           ?>
+
+          <li class="mt">
+            <a class="active" href="">
+              <i class="fa fa-dashboard"></i>
+              <span>Dashboard</span>
+              </a>
+          </li>
+          <li>
+            <a href="app/list_batch">
+              <i class="fa fa-paste"></i>
+              <span>Daftar Ujian</span>
+              </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fa fa-star-half-o"></i>
+              <span>Skor / Rangking</span>
+              </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fa fa-paperclip"></i>
+              <span>Ujian Selesai</span>
+              </a>
+          </li>
+          <li>
+            <a href="Pengaturan">
+              <i class="fa fa-suitcase"></i>
+              <span>Ubah Profil</span>
+              </a>
+          </li>
+          
+          
+
+
+          <?php } ?>
           <!-- <li class="sub-menu">
             <a href="javascript:;">
               <i class="fa fa-comments-o"></i>

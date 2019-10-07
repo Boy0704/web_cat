@@ -13,7 +13,7 @@
 	<div class="col-md-8">
 		<div class="panel panel-info">
 		  <div class="panel-heading"> 
-		  Soal Online 
+		  Soal Online | <b><?php echo $nama_soal ?></b>
 
 		  <b id="clockdiv" class="label label-success" style="font-size: 12pt; margin-left: 30px;"><span class="hours"></span> : <span class="minutes"></span> : <span class="seconds"></span></b>
 

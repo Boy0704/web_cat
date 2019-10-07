@@ -18,7 +18,7 @@ class App extends CI_Controller {
 
     public function list_batch()
     {
-    	$userid = 1;
+    	$userid = $this->session->userdata('id_user');
     	$data = array(
     		'userid' => $userid,
     		'query' => $this->db->get('batch'),
@@ -30,7 +30,7 @@ class App extends CI_Controller {
 
     public function paket_soal($batch_id)
     {
-    	$userid = 1;
+    	$userid = $this->session->userdata('id_user');
     	$data = array(
     		'userid' => $userid,
     		'query' => $this->db->get_where('paket_soal', array('batch_id'=>base64_decode($batch_id))),
@@ -42,7 +42,7 @@ class App extends CI_Controller {
 
     public function list_soal($paket_soal_id)
     {
-    	$userid = 1;
+    	$userid = $this->session->userdata('id_user');
     	$paket_soal_id = base64_decode($paket_soal_id);
     	$data = array(
     		'userid' => $userid,
@@ -55,11 +55,16 @@ class App extends CI_Controller {
     
     public function soal_siswa($soal_id)
     {
-    	$userid = 1;
+    	$rw_nm_soal = $this->db->query("SELECT a.soal,b.paket_soal  FROM soal as a, paket_soal as b, item_soal as c where c.paket_soal_id=b.paket_soal_id and c.soal_id=a.soal_id and c.soal_id='$soal_id' ")->row();
+    	$nama_soal = $rw_nm_soal->soal.' - '.$rw_nm_soal->paket_soal;
+
+
+    	$userid = $this->session->userdata('id_user');
     	$this->db->order_by('butir_soal_id', 'RANDOM');
     	$this->db->select('butir_soal_id');
     	$data = array(
     		'userid' => $userid,
+    		'nama_soal' => $nama_soal,
     		'jumlah_soal' => $this->db->get_where('butir_soal',array('soal_id'=>$soal_id)),
     		'judul_page' => 'Soal Ujian',
             'konten' => 'soal_siswa/soal',
