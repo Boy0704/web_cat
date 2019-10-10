@@ -10,7 +10,7 @@
         <div class="blog-title"><?php echo $row->paket_soal ?></div>
       </div>
       <div class="blog-text">
-        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+        <p><?php echo $row->paket_soal ?>.</p>
       </div>
     </div>
     </a>

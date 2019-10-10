@@ -43,6 +43,8 @@
 			<td><?php echo $batch->nama_batch ?></td>
 			<td style="text-align:center" width="200px">
 				<?php 
+                echo anchor(site_url('app/akses_batch/'.$batch->batch_id),'<span class="label label-primary">Akses batch</span>'); 
+                echo ' | '; 
 				echo anchor(site_url('batch/update/'.$batch->batch_id),'<span class="label label-info">Ubah</span>'); 
 				echo ' | '; 
 				echo anchor(site_url('batch/delete/'.$batch->batch_id),'<span class="label label-danger">Hapus</span>','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'); 

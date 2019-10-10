@@ -21,7 +21,7 @@ class App extends CI_Controller {
     	$userid = $this->session->userdata('id_user');
     	$data = array(
     		'userid' => $userid,
-    		'query' => $this->db->get('batch'),
+    		'query' => $this->db->query("SELECT * FROM batch, akses_batch where batch.batch_id=akses_batch.batch_id and akses_batch.user_id=$userid "),
     		'judul_page' => 'List Batch',
             'konten' => 'soal_siswa/list_batch',
     	);
@@ -46,11 +46,34 @@ class App extends CI_Controller {
     	$paket_soal_id = base64_decode($paket_soal_id);
     	$data = array(
     		'userid' => $userid,
+    		'paket_soal_id' => $paket_soal_id,
     		'query' => $this->db->query("SELECT soal.soal,soal.soal_id FROM item_soal,soal where item_soal.soal_id=soal.soal_id and item_soal.paket_soal_id='$paket_soal_id' "),
     		'judul_page' => 'List Soal',
             'konten' => 'soal_siswa/list_soal',
     	);
     	$this->load->view('v_index', $data);
+    }
+
+    public function mulai_ujian($paket_soal_id,$soal_id)
+    {
+    	$userid = $this->session->userdata('id_user');
+    	$data = array(
+    		'userid' => $userid,
+    		'paket_soal_id' => $paket_soal_id,
+    		'soal_id'=> $soal_id,
+    		'judul_page' => 'Mulai Ujian',
+            'konten' => 'soal_siswa/mulai_ujian',
+    	);
+    	$this->load->view('v_index', $data);
+    }
+
+    public function aksi_mulai_ujian($paket_soal_id, $soal_id, $userid)
+    {
+    	date_default_timezone_set('Asia/Jakarta');
+    	$waktu_mulai = date('Y-m-d H:i:s');
+    	$this->db->insert('skor', array('user_id'=>$userid,'paket_soal_id'=>$paket_soal_id,'waktu_mulai'=>$waktu_mulai,'status'=>0));
+    	$insert_id = $this->db->insert_id();
+    	redirect('app/soal_siswa/'.$soal_id.'/'.$insert_id);
     }
     
     public function soal_siswa($soal_id)
@@ -72,6 +95,57 @@ class App extends CI_Controller {
     	$this->load->view('v_index', $data);
     }
 
+
+    
+    public function simpan_jawaban($user_id, $skor_id, $soal_id, $butir_soal_id, $bobot)
+    {
+    	date_default_timezone_set('Asia/Jakarta');
+    	$jawaban = $this->input->post('jawaban');
+    	$cekjawaban = $this->db->get_where('skor_detail', array('user_id'=>$user_id,'soal_id'=>$soal_id,'butir_soal_id'=>$butir_soal_id));
+    	if ($cekjawaban->num_rows() == 1) {
+    		$data = array(
+	    		'nilai' => $bobot,
+	    		'jawaban' => $jawaban,
+	    		'waktu' => date('Y-m-d H:i:s')
+	    	);
+	    	$this->db->where('user_id', $user_id);
+	    	$this->db->where('soal_id', $soal_id);
+	    	$this->db->where('butir_soal_id', $butir_soal_id);
+	    	$this->db->update('skor_detail', $data);
+    	} elseif ($cekjawaban->num_rows() == 0) {
+    		$data = array(
+	    		'user_id' => $user_id,
+	    		'skor_id' => $skor_id,
+	    		'soal_id' => $soal_id,
+	    		'butir_soal_id' => $butir_soal_id,
+	    		'nilai' => $bobot,
+	    		'jawaban' => $jawaban,
+	    		'waktu' => date('Y-m-d H:i:s')
+	    	);
+	    	$this->db->insert('skor_detail', $data);
+    	} 
+    }
+
+
+    public function akses_batch($batch_id)
+    {
+    	if ($_POST) {
+    		$userid = $this->input->post('userid');
+    		$cekbatch = $this->db->get_where('akses_batch',array('user_id'=>$userid,'batch_id'=>$batch_id));
+    		if ($cekbatch->num_rows() == 0) {
+    			$this->db->insert('akses_batch', array('user_id'=>$userid,'batch_id'=>$batch_id));
+    		} else {
+    			#tidak melakukan apapun
+    		}
+    	} else {
+    		$data = array(
+	    		'judul_page' => 'Akses Batch',
+	            'konten' => 'batch/akses_batch',
+	    	);
+	    	$this->load->view('v_index', $data);
+    	}
+    }
+
     public function ambil_soal_ujian($butir_soal_id, $no_soal)
     {
     	$ambil = $this->db->get_where('butir_soal', array('butir_soal_id'=>$butir_soal_id))->row();
@@ -90,41 +164,46 @@ class App extends CI_Controller {
 		    			if ($ambil->jawaban1 == '') { } else {
 		    			?>
 		    			<div class="radio">
-					      <label><input type="radio" name="jwb" nilai="<?php echo $ambil->bobot_jawaban1 ?>" ><?php echo $ambil->jawaban1 ?></label>
+					      <label><input type="radio" name="jwb" nilai="<?php echo $ambil->bobot_jawaban1 ?>" value="<?php echo $ambil->jawaban1 ?>" butir_soal_id="<?php echo $butir_soal_id ?>"><?php echo $ambil->jawaban1 ?></label>
 					    </div>
 						<?php } ?>
 						<?php 
 		    			if ($ambil->jawaban2 == '') { } else {
 		    			?>
 		    			<div class="radio">
-					      <label><input type="radio" name="jwb" nilai="<?php echo $ambil->bobot_jawaban2 ?>" ><?php echo $ambil->jawaban2 ?></label>
+					      <label><input type="radio" name="jwb" nilai="<?php echo $ambil->bobot_jawaban2 ?>" value="<?php echo $ambil->jawaban2 ?>" butir_soal_id="<?php echo $butir_soal_id ?>"><?php echo $ambil->jawaban2 ?></label>
 					    </div>
 						<?php } ?>
 						<?php 
 		    			if ($ambil->jawaban3 == '') { } else {
 		    			?>
 		    			<div class="radio">
-					      <label><input type="radio" name="jwb" nilai="<?php echo $ambil->bobot_jawaban3 ?>" ><?php echo $ambil->jawaban3 ?></label>
+					      <label><input type="radio" name="jwb" nilai="<?php echo $ambil->bobot_jawaban3 ?>" value="<?php echo $ambil->jawaban3 ?>" butir_soal_id="<?php echo $butir_soal_id ?>"><?php echo $ambil->jawaban3 ?></label>
 					    </div>
 						<?php } ?>
 						<?php 
 		    			if ($ambil->jawaban4 == '') { } else {
 		    			?>
 		    			<div class="radio">
-					      <label><input type="radio" name="jwb" nilai="<?php echo $ambil->bobot_jawaban4 ?>" ><?php echo $ambil->jawaban4 ?></label>
+					      <label><input type="radio" name="jwb" nilai="<?php echo $ambil->bobot_jawaban4 ?>" value="<?php echo $ambil->jawaban4 ?>" butir_soal_id="<?php echo $butir_soal_id ?>"><?php echo $ambil->jawaban4 ?></label>
 					    </div>
 						<?php } ?>
 						<?php 
 		    			if ($ambil->jawaban5 == '') { } else {
 		    			?>
 		    			<div class="radio">
-					      <label><input type="radio" name="jwb" nilai="<?php echo $ambil->bobot_jawaban5 ?>" ><?php echo $ambil->jawaban5 ?></label>
+					      <label><input type="radio" name="jwb" nilai="<?php echo $ambil->bobot_jawaban5 ?>" value="<?php echo $ambil->jawaban5 ?>" butir_soal_id="<?php echo $butir_soal_id ?>"><?php echo $ambil->jawaban5 ?></label>
 					    </div>
 						<?php } ?>
 						
 					</form>
 		    	</div>
     		</div>
+    		<ul class="pager">
+			    <!-- <li class="previous"><a style="cursor: pointer;" id="pager">Sebelumnya</a></li> -->
+			    <li><label><input type="checkbox" id="ragu" value="">Ragu-ragu</label></li>
+			    <!-- <li class="next"><a style="cursor: pointer;" id="">Selanjutnya</a></li> -->
+			</ul>
     	</div>
     	
     	<?php
