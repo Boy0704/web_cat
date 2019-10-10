@@ -6,6 +6,7 @@
 		<th>Action</th>
             </tr>
             </thead>
+            <tbody>
             <?php
             $start = 0;
             $siswa_data= $this->db->get_where('user', array('akses'=>'siswa'))->result();
@@ -32,5 +33,6 @@
                 <?php
             }
             ?>
+            </tbody>
         </table>
         

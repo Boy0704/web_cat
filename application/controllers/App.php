@@ -262,7 +262,52 @@ class App extends CI_Controller {
 		}
 	}
 
+	public function detail_paket_soal($paket_soal_id, $user_id)
+	{
+		$data = array(
+    		'judul_page' => 'Detail Paket Soal',
+            'konten' => 'detail_paket_soal',
+    	);
+    	$this->load->view('v_index', $data);
+	}
 
+	public function ujian_selesai()
+	{
+		$data = array(
+    		'judul_page' => 'Ujian yang telah selesai',
+            'konten' => 'ujian_selesai',
+    	);
+    	$this->load->view('v_index', $data);
+	}
+
+	public function update_profil()
+	{
+		$user_id = $this->session->userdata('id_user');
+		if ($_POST) {
+			$nama_lengkap = $this->input->post('nama_lengkap');
+			$email = $this->input->post('email');
+			$alamat = $this->input->post('alamat');
+			$no_hp = $this->input->post('no_hp');
+			$username = $this->input->post('username');
+			$password = md5($this->input->post('password'));
+			if ($password == '') {
+				$this->db->where('user_id', $user_id);
+				$this->db->update('user', array('nama_lengkap'=>$nama_lengkap,'email'=>$email, 'alamat'=>$alamat,'no_hp'=>$no_hp, 'username' => $username));
+				redirect('app/update_profil','refresh');
+			} else {
+				$this->db->where('user_id', $user_id);
+				$this->db->update('user', array('nama_lengkap'=>$nama_lengkap,'email'=>$email, 'alamat'=>$alamat,'no_hp'=>$no_hp, 'username' => $username,'password' => $password));
+				redirect('app/update_profil','refresh');
+			}
+		} else {
+			$data = array(
+				'data' => $this->db->get_where('user',array('user_id'=>$user_id)),
+	    		'judul_page' => 'Update Profil',
+	            'konten' => 'update_profil',
+	    	);
+	    	$this->load->view('v_index', $data);
+		}
+	}
 
 	function logout()
 	{

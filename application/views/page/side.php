@@ -8,7 +8,7 @@
           if ($this->session->userdata('level') == 'admin') {
             ?>
           <li class="mt">
-            <a class="active" href="">
+            <a href="">
               <i class="fa fa-dashboard"></i>
               <span>Dashboard</span>
               </a>
@@ -80,7 +80,7 @@
            ?>
 
           <li class="mt">
-            <a class="active" href="">
+            <a href="">
               <i class="fa fa-dashboard"></i>
               <span>Dashboard</span>
               </a>
@@ -98,13 +98,13 @@
               </a>
           </li>
           <li>
-            <a href="#">
+            <a href="app/ujian_selesai">
               <i class="fa fa-paperclip"></i>
               <span>Ujian Selesai</span>
               </a>
           </li>
           <li>
-            <a href="Pengaturan">
+            <a href="app/update_profil">
               <i class="fa fa-suitcase"></i>
               <span>Ubah Profil</span>
               </a>
