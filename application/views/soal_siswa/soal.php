@@ -9,10 +9,11 @@
 
 	$user_id = $this->session->userdata('id_user');
 	$soal_id = $this->uri->segment(3);
-	$skor_id = $this->uri->segment(4);
+	$paket_soal_id = $this->uri->segment(4);
+	$skor_id = $this->uri->segment(5);
 	$ambil_jam_mulai = $this->db->get_where('skor', array('skor_id'=>$skor_id))->row()->waktu_mulai;
 
-	$minutes_to_add = '60';
+	$minutes_to_add = '90';
 	$date = date_create($ambil_jam_mulai);
 	date_add($date, date_interval_create_from_date_string($minutes_to_add.' minutes'));
 	$jam_mulai = date_format($date, 'H:i:s');
@@ -34,6 +35,11 @@
 		  Soal Online | <b><?php echo $nama_soal ?></b>
 
 		  <b id="clockdiv" class="label label-success" style="font-size: 12pt; margin-left: 30px;"><span class="hours"></span> : <span class="minutes"></span> : <span class="seconds"></span></b>
+	  
+
+		  <a href="app/aksi_mulai_ujian/<?php echo $paket_soal_id.'/'.$soal_id.'/'.$user_id.'/'.$skor_id ?>">
+		  	<b class="label label-success" style="font-size: 12pt; margin-left: 30px;">Selesai</b>
+		  </a>
 
 		 
 

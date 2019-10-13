@@ -67,13 +67,64 @@ class App extends CI_Controller {
     	$this->load->view('v_index', $data);
     }
 
-    public function aksi_mulai_ujian($paket_soal_id, $soal_id, $userid)
+    public function aksi_mulai_ujian($paket_soal_id, $soal_id, $userid, $skor_id=null)
     {
     	date_default_timezone_set('Asia/Jakarta');
     	$waktu_mulai = date('Y-m-d H:i:s');
-    	$this->db->insert('skor', array('user_id'=>$userid,'paket_soal_id'=>$paket_soal_id,'waktu_mulai'=>$waktu_mulai,'status'=>0));
-    	$insert_id = $this->db->insert_id();
-    	redirect('app/soal_siswa/'.$soal_id.'/'.$insert_id);
+    	//cek apakah ada soal yang belum selesai
+    	if ($skor_id == null) {
+    		$this->db->insert('skor', array('user_id'=>$userid,'paket_soal_id'=>$paket_soal_id,'waktu_mulai'=>$waktu_mulai,'status'=>0));
+    		$insert_id = $this->db->insert_id();
+    		redirect('app/soal_siswa/'.$soal_id.'/'.$paket_soal_id.'/'.$insert_id);
+
+    	} else {
+
+    		$this->db->where('skor_id', $skor_id);
+    		$this->db->update('skor', array('status'=> 1));
+
+    		//cek soal berikutnya
+
+    		$sql = "
+			  SELECT
+					item_soal.soal_id 
+				FROM
+					item_soal,skor
+				WHERE 
+						item_soal.paket_soal_id=skor.paket_soal_id
+						and
+					 skor.paket_soal_id = '$paket_soal_id'
+					 AND
+					 skor.user_id='$userid'
+					 and
+					item_soal.soal_id  NOT IN (
+					SELECT
+						DISTINCT(skor_detail.soal_id)
+					FROM
+						skor_detail,
+						skor 
+					WHERE
+					skor_detail.skor_id = skor.skor_id 
+					AND skor.paket_soal_id='$paket_soal_id' and skor_detail.user_id='$userid')
+			  ";
+
+			//cek soal_id baru
+			$cek_soal_id_bru = $this->db->query($sql);
+			$soal_id_bru = $this->db->query($sql)->row()->soal_id;
+
+			//cek apakah soal sudah tidak ada lagi
+			if ($cek_soal_id_bru->num_rows() == 0) {
+				?>
+				<script type="text/javascript">
+					alert("Selamat anda telah menyelesaikan Ujian dengan baik");
+					window.location="<?php echo base_url('app/ujian_selesai'); ?>"
+				</script>
+				<?php
+			} else {
+				$this->db->insert('skor', array('user_id'=>$userid,'paket_soal_id'=>$paket_soal_id,'waktu_mulai'=>$waktu_mulai,'status'=>0));
+    			$insert_id = $this->db->insert_id();
+				redirect('app/soal_siswa/'.$soal_id_bru.'/'.$paket_soal_id.'/'.$insert_id);
+			}
+    	}
     }
     
     public function soal_siswa($soal_id)
