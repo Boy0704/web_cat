@@ -204,7 +204,7 @@
           document.getElementById('reload_page').innerHTML= i;
           if (i == 0) {
             clearInterval(timeinterval);
-            window.location.reload();
+            window.location="<?php echo base_url() ?>app/aksi_mulai_ujian/<?php echo $paket_soal_id.'/'.$soal_id.'/'.$user_id.'/'.$skor_id ?>";
           }
         i--;
       }else {
