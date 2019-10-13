@@ -1,7 +1,7 @@
 <table class="table table-bordered tabel-data" style="margin-bottom: 10px">
             <thead>
             <tr>
-                <th>No</th>
+                <th>Peringkat</th>
                 <th>Nama Siswa</th>
                 <th>Paket Soal</th>
 				<th>Total Nilai</th>
@@ -30,7 +30,8 @@
                 and us.user_id=sk.user_id
                 AND ps.batch_id = '$batch_id'
                 AND sk.`status`='1'
-                GROUP BY sk.user_id
+                -- GROUP BY sk.user_id
+                GROUP BY sd.user_id,sd.skor_id
                 
                 ORDER BY total_nilai DESC
 
