@@ -47,7 +47,7 @@
 
 			 </td>
 			<td style="text-align:center" width="200px">
-				<a href="app/cetak_soal_ujian/<?php echo $siswa->soal_id ?>/<?php $user_id ?>" class="btn btn-primary">Cetak</a>
+				<a href="app/detail_jawaban_soal/<?php echo $siswa->soal_id ?>/<?php echo $user_id ?>" class="btn btn-info">Lihat</a>
 			</td>
 		</tr>
                 <?php

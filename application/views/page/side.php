@@ -92,7 +92,7 @@
               </a>
           </li>
           <li>
-            <a href="#">
+            <a href="app/rangking_siswa">
               <i class="fa fa-star-half-o"></i>
               <span>Skor / Rangking</span>
               </a>

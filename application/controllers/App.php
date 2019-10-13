@@ -79,8 +79,7 @@ class App extends CI_Controller {
 
     	} else {
 
-    		$this->db->where('skor_id', $skor_id);
-    		$this->db->update('skor', array('status'=> 1));
+    		
 
     		//cek soal berikutnya
 
@@ -113,16 +112,19 @@ class App extends CI_Controller {
 
 			//cek apakah soal sudah tidak ada lagi
 			if ($cek_soal_id_bru->num_rows() == 0) {
+				$this->db->where('skor_id', $skor_id);
+    			$this->db->update('skor', array('status'=> 1, 'waktu_selesai'=>$waktu_mulai));
 				?>
 				<script type="text/javascript">
 					alert("Selamat anda telah menyelesaikan Ujian dengan baik");
 					window.location="<?php echo base_url('app/ujian_selesai'); ?>"
 				</script>
 				<?php
+				
 			} else {
-				$this->db->insert('skor', array('user_id'=>$userid,'paket_soal_id'=>$paket_soal_id,'waktu_mulai'=>$waktu_mulai,'status'=>0));
-    			$insert_id = $this->db->insert_id();
-				redirect('app/soal_siswa/'.$soal_id_bru.'/'.$paket_soal_id.'/'.$insert_id);
+				// $this->db->insert('skor', array('user_id'=>$userid,'paket_soal_id'=>$paket_soal_id,'waktu_mulai'=>$waktu_mulai,'status'=>0));
+    // 			$insert_id = $this->db->insert_id();
+				redirect('app/soal_siswa/'.$soal_id_bru.'/'.$paket_soal_id.'/'.$skor_id);
 			}
     	}
     }
@@ -175,6 +177,36 @@ class App extends CI_Controller {
 	    	);
 	    	$this->db->insert('skor_detail', $data);
     	} 
+    }
+
+    public function rangking_siswa()
+    {
+    	$data = array(
+    		'judul_page' => 'Rangking Siswa',
+            'konten' => 'rangking_siswa',
+    	);
+    	$this->load->view('v_index', $data);
+    }
+
+    public function detail_rangking_siswa($batch_id)
+    {
+    	$data = array(
+    		'judul_page' => 'Rangking Siswa',
+            'konten' => 'detail_rangking_siswa',
+    	);
+    	$this->load->view('v_index', $data);
+    }
+
+    public function detail_nilai_ujian($skor_id, $user_id,$paket_soal_id)
+    {
+    	$data = array(
+    		'skor_id'=>$skor_id,
+    		'user_id'=>$user_id,
+    		'paket_soal_id'=>$paket_soal_id,
+    		'judul_page' => 'Detail Nilai Ujian Siswa',
+            'konten' => 'detail_nilai_ujian',
+    	);
+    	$this->load->view('v_index', $data);
     }
 
 
@@ -318,6 +350,19 @@ class App extends CI_Controller {
 		$data = array(
     		'judul_page' => 'Detail Paket Soal',
             'konten' => 'detail_paket_soal',
+    	);
+    	$this->load->view('v_index', $data);
+	}
+
+	public function detail_jawaban_soal($soal_id,$user_id)
+	{
+		$sql = "SELECT * FROM skor, skor_detail, butir_soal WHERE skor.skor_id=skor_detail.skor_id and skor.user_id=skor_detail.user_id 
+and skor_detail.butir_soal_id=butir_soal.butir_soal_id and skor.user_id='$user_id' and skor_detail.soal_id='$soal_id'";
+		$data = array(
+			'data' => $this->db->query($sql),
+			'soal_id' => $soal_id,
+    		'judul_page' => 'Detail Jawaban',
+            'konten' => 'detail_jawaban_soal',
     	);
     	$this->load->view('v_index', $data);
 	}
