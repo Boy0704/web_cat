@@ -115,7 +115,7 @@ class Mapel extends CI_Controller
 		'operator' => set_value('operator', $row->operator),
 		'nilai_lulus' => set_value('nilai_lulus', $row->nilai_lulus),
 	    );
-            $this->load->view(v_index, $data);
+            $this->load->view('v_index', $data);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('mapel'));

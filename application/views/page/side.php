@@ -56,7 +56,7 @@
               </a>
           </li>
           <li>
-            <a href="#">
+            <a href="app/update_profil">
               <i class="fa fa-key"></i>
               <span>Ubah Password</span>
               </a>
@@ -68,12 +68,12 @@
               </a>
           </li>
           
-          <li>
+          <!-- <li>
             <a href="#">
               <i class="fa fa-users"></i>
               <span>Reset</span>
               </a>
-          </li>
+          </li> -->
 
             <?php
           } elseif ($this->session->userdata('level') == 'siswa') {

@@ -4,7 +4,7 @@ $sql = "
 		us.nama_lengkap, ps.paket_soal, sk.waktu_mulai, sk.waktu_selesai
 	FROM
 		skor AS sk,
-		USER AS us,
+		user AS us,
 		paket_soal AS ps 
 	WHERE
 		sk.user_id = us.user_id 

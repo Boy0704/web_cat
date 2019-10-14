@@ -103,7 +103,7 @@ class Pengaturan extends CI_Controller
 		'pengaturan_id' => set_value('pengaturan_id', $row->pengaturan_id),
 		'pengaturan' => set_value('pengaturan', $row->pengaturan),
 	    );
-            $this->load->view(v_index, $data);
+            $this->load->view('v_index', $data);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('pengaturan'));

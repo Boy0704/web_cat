@@ -3,9 +3,16 @@
             <tr>
                 <th>Peringkat</th>
                 <th>Nama Siswa</th>
-                <th>Paket Soal</th>
+
+                <?php 
+                foreach ($this->db->get('mapel')->result() as $key) {
+                 ?>
+                <th><?php echo $key->mapel ?></th>
+            <?php } ?>
+                <th>SKD (TWK+TIU+TKP)</th>
+                <th>(TPA+TBI)</th>
 				<th>Total Nilai</th>
-				<th>Action</th>
+				<!-- <th>Action</th> -->
             </tr>
             </thead>
             <tbody>
@@ -43,11 +50,21 @@
                 <tr>
 			<td width="80px"><?php echo ++$start ?></td>
             <td><?php echo $siswa->nama_lengkap ?></td>
-            <td><?php echo $siswa->paket_soal ?></td>
+
+            <!-- revisi baru -->
+            <td><?php echo cek_nilai_permapel($siswa->skor_id, $siswa->user_id, 1) ?></td>
+            <td><?php echo cek_nilai_permapel($siswa->skor_id, $siswa->user_id, 2) ?></td>
+            <td><?php echo cek_nilai_permapel($siswa->skor_id, $siswa->user_id, 3) ?></td>
+            <td><?php echo cek_nilai_permapel($siswa->skor_id, $siswa->user_id, 4) ?></td>
+            <td><?php echo cek_nilai_permapel($siswa->skor_id, $siswa->user_id, 5) ?></td>
+            <td><?php echo cek_nilai_permapel($siswa->skor_id, $siswa->user_id, 1)+cek_nilai_permapel($siswa->skor_id, $siswa->user_id, 2)+cek_nilai_permapel($siswa->skor_id, $siswa->user_id, 3) ?></td>
+            <td><?php echo cek_nilai_permapel($siswa->skor_id, $siswa->user_id, 4)+cek_nilai_permapel($siswa->skor_id, $siswa->user_id, 5) ?></td>
+            <td><?php echo $siswa->total_nilai ?></td>
+            <!-- <td><?php echo $siswa->paket_soal ?></td>
 			<td><?php echo $siswa->total_nilai ?></td>
 			<td style="text-align:center" width="200px">
 				<a href="app/detail_nilai_ujian/<?php echo $siswa->skor_id.'/'.$siswa->user_id.'/'.$siswa->paket_soal_id ?>" class="btn btn-info">Pilih</a>
-			</td>
+			</td> -->
 		</tr>
                 <?php
             }

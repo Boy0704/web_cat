@@ -126,7 +126,7 @@ class Guru extends CI_Controller
 		'username' => set_value('username', $row->username),
 		'password' => set_value('password', $row->password),
 	    );
-            $this->load->view(v_index, $data);
+            $this->load->view('v_index', $data);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('guru'));

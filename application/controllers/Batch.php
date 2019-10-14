@@ -103,7 +103,7 @@ class Batch extends CI_Controller
 		'batch_id' => set_value('batch_id', $row->batch_id),
 		'nama_batch' => set_value('nama_batch', $row->nama_batch),
 	    );
-            $this->load->view(v_index, $data);
+            $this->load->view('v_index', $data);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('batch'));

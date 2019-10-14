@@ -127,7 +127,7 @@ class User extends CI_Controller
 		'password' => set_value('password', $row->password),
 		'akses' => set_value('akses', $row->akses),
 	    );
-            $this->load->view(v_index, $data);
+            $this->load->view('v_index', $data);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('user'));
