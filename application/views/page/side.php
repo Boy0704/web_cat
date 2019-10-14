@@ -38,13 +38,13 @@
               </a>
           </li>
           <li>
-            <a href="#">
+            <a href="paket_soal">
               <i class="fa fa-paperclip"></i>
               <span>Paket Soal</span>
               </a>
           </li>
           <li>
-            <a href="#">
+            <a href="soal">
               <i class="fa fa-list-alt"></i>
               <span>Daftar Semua Soal</span>
               </a>
