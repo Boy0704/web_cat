@@ -217,6 +217,7 @@ class App extends CI_Controller {
     		$cekbatch = $this->db->get_where('akses_batch',array('user_id'=>$userid,'batch_id'=>$batch_id));
     		if ($cekbatch->num_rows() == 0) {
     			$this->db->insert('akses_batch', array('user_id'=>$userid,'batch_id'=>$batch_id));
+    			redirect('app/akses_batch/'.$batch_id,'refresh');
     		} else {
     			#tidak melakukan apapun
     		}

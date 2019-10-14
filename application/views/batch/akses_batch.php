@@ -22,7 +22,7 @@
 				if ($cekbatch->num_rows() == 0) {
 				 ?>
 				<form action="" method="POST">
-					<input type="hidden" name="userid" value="<?php echo $this->session->userdata('id_user'); ?>">
+					<input type="hidden" name="userid" value="<?php echo $siswa->user_id; ?>">
 					<button type="submit" class="btn btn-primary btn-xs">Pilih</button>
 				</form>
 			<?php } else { ?>
