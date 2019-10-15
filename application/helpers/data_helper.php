@@ -48,6 +48,15 @@ function batch($batch_id)
 	return $data;
 }
 
+function kat_mapel($kat)
+{
+	if ($kat == 'waktu_soal_muatan_lokal') {
+		return 'muatan lokal';
+	} elseif ($kat == 'waktu_soal_umum') {
+		return 'umum';
+	}
+}
+
 function mapel($mapel_id)
 {
 	$CI 	=& get_instance();

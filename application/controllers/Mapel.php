@@ -129,6 +129,9 @@ class Mapel extends CI_Controller
         if ($this->form_validation->run() == FALSE) {
             $this->update($this->input->post('mapel_id', TRUE));
         } else {
+
+            // print_r($_POST); exit();
+
             $data = array(
 		'mapel' => $this->input->post('mapel',TRUE),
 		'mapel_kategori' => $this->input->post('mapel_kategori',TRUE),

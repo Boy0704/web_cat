@@ -13,7 +13,9 @@
 	$skor_id = $this->uri->segment(5);
 	$ambil_jam_mulai = $this->db->get_where('skor', array('skor_id'=>$skor_id))->row()->waktu_mulai;
 
-	$minutes_to_add = '90';
+	$mapel_id = $this->db->get_where('soal', array('soal_id'=>$soal_id))->row()->mapel_id;
+
+	$minutes_to_add = $this->db->query("SELECT pg.pengaturan FROM pengaturan as pg, mapel as mp where mp.mapel_kategori=pg.pengaturan_id and mp.mapel_id='$mapel_id' ")->row()->pengaturan;
 	$date = date_create($ambil_jam_mulai);
 	date_add($date, date_interval_create_from_date_string($minutes_to_add.' minutes'));
 	$jam_mulai = date_format($date, 'H:i:s');
