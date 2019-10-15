@@ -44,25 +44,15 @@
 
             ";
             $siswa_data= $this->db->query($sql)->result();
+            //hapus data rangking
+            $this->db->truncate('rangking');
             foreach ($siswa_data as $siswa)
             {
                 $cek_user_id = $this->db->get_where('rangking', array('user_id'=>$siswa->user_id));
+                $cek_rangking = $this->db->get_where('rangking', array('user_id'=>$siswa->user_id))->row();
 
                 // echo cek_nilai_permapel($siswa->skor_id, $siswa->user_id, 4); exit;
-                $data_rangking_update = '';
-
-                if (cek_nilai_permapel($siswa->skor_id, $siswa->user_id, 1) == '0' && cek_nilai_permapel($siswa->skor_id, $siswa->user_id, 2) == '0' && cek_nilai_permapel($siswa->skor_id, $siswa->user_id, 3) == '0') {
-                    $data_rangking_update = array(
-                        'tbi' => cek_nilai_permapel($siswa->skor_id, $siswa->user_id, 4),
-                        'tpa' => cek_nilai_permapel($siswa->skor_id, $siswa->user_id, 5)
-                    );
-                } else if (cek_nilai_permapel($siswa->skor_id, $siswa->user_id, 4) == '0' && cek_nilai_permapel($siswa->skor_id, $siswa->user_id, 5) == '0') {
-                    $data_rangking_update = array(
-                        'tiu' => cek_nilai_permapel($siswa->skor_id, $siswa->user_id, 1),
-                        'tkp' => cek_nilai_permapel($siswa->skor_id, $siswa->user_id, 2),
-                        'twk' => cek_nilai_permapel($siswa->skor_id, $siswa->user_id, 3),
-                    );
-                }
+                
                 
 
                 // $data_rangking_update = array(
@@ -96,16 +86,42 @@
                     'tpa' => cek_nilai_permapel($siswa->skor_id, $siswa->user_id, 5),
                     'total'=> $siswa->total_nilai
                 );
-                if ($cek_user_id->num_rows() > 0) {
+                if ($cek_user_id->num_rows() > 0 and ($cek_rangking->tiu == 0||$cek_rangking->tkp == 0||$cek_rangking->twk == 0||$cek_rangking->tbi == 0||$cek_rangking->tpa == 0) ) {
                     //update data rangking
+                    
+
+                    $data_rangking_update = '';
+
+                    if (cek_nilai_permapel($siswa->skor_id, $siswa->user_id, 1) == 0 && cek_nilai_permapel($siswa->skor_id, $siswa->user_id, 2) == 0 && cek_nilai_permapel($siswa->skor_id, $siswa->user_id, 3) == 0) {
+                        $total = $cek_rangking->total + $siswa->total_nilai;
+                        $data_rangking_update = array(
+                            'user_id' => $siswa->user_id,
+                            'tbi' => cek_nilai_permapel($siswa->skor_id, $siswa->user_id, 4),
+                            'tpa' => cek_nilai_permapel($siswa->skor_id, $siswa->user_id, 5),
+                            'total'=> $total
+                        );
+                    } else if (cek_nilai_permapel($siswa->skor_id, $siswa->user_id, 4) == 0 && cek_nilai_permapel($siswa->skor_id, $siswa->user_id, 5) == 0) {
+                        $total = $cek_rangking->total + $siswa->total_nilai;
+                        $data_rangking_update = array(
+                            'user_id' => $siswa->user_id,
+                            'tiu' => cek_nilai_permapel($siswa->skor_id, $siswa->user_id, 1),
+                            'tkp' => cek_nilai_permapel($siswa->skor_id, $siswa->user_id, 2),
+                            'twk' => cek_nilai_permapel($siswa->skor_id, $siswa->user_id, 3),
+                            'total'=> $total
+                        );
+                    }
+
+                    // print_r($data_rangking_update);exit;
+
                     $this->db->where('user_id', $siswa->user_id);
-                    $this->db->get('rangking', $data_rangking_update);
+                    $this->db->update('rangking', $data_rangking_update);
                 } else {
                     $this->db->insert('rangking', $data_rangking_input);
                 }
             }
 
                 //ambil data rangking
+                $this->db->order_by('total', 'desc');
                 foreach ($this->db->get('rangking')->result() as $row) {
                 ?>
                 <tr>
