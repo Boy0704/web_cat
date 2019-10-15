@@ -1,5 +1,10 @@
 <div class="row">
   <?php 
+  if ($query->num_rows() == 0) {
+  ?>
+  <div class="alert alert-info">Anda Tidak memiliki akses Batch, Silahkan hubungi administrator</div>
+  <?php 
+  } else {
   foreach ($query->result() as $row) {
    ?>
   <div class="col-lg-6 col-md-6 col-sm-6 mb">
@@ -15,5 +20,7 @@
     </div>
     </a>
   </div>
-<?php } ?>
+<?php } 
+  }
+?>
 </div>

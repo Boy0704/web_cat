@@ -28,7 +28,7 @@ $nama_soal = $this->db->query("SELECT soal.soal, mapel.mapel, mapel.nilai_lulus 
 		<td>No.</td>
 		<th>Soal</th>
 		<th>Jawaban</th>
-		<th>Bobot</th>
+		<th>Jawaban benar</th>
 	</tr>
 	<?php
 	$no = 1;

@@ -108,12 +108,21 @@ class App extends CI_Controller {
 
 			//cek soal_id baru
 			$cek_soal_id_bru = $this->db->query($sql);
+			error_reporting(0);
 			$soal_id_bru = $this->db->query($sql)->row()->soal_id;
 
 			//cek apakah soal sudah tidak ada lagi
 			if ($cek_soal_id_bru->num_rows() == 0) {
 				$this->db->where('skor_id', $skor_id);
     			$this->db->update('skor', array('status'=> 1, 'waktu_selesai'=>$waktu_mulai));
+
+    			//hapus akses batch ujian
+    			$get_paket_soal_id = $this->db->get('skor', array('skor_id'=>$skor_id))->row()->paket_soal_id;
+    			$get_batch_id = $this->db->get('paket_soal', array('paket_soal_id'=>$get_paket_soal_id))->row()->batch_id;
+    			$this->db->where('batch_id', $get_batch_id);
+    			$this->db->where('user_id', $this->session->userdata('id_user'));
+    			$this->db->delete('akses_batch');
+
 				?>
 				<script type="text/javascript">
 					alert("Selamat anda telah menyelesaikan Ujian dengan baik");

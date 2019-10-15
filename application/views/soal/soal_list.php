@@ -32,7 +32,7 @@
         <table class="table table-bordered" style="margin-bottom: 10px">
             <tr>
                 <th>No</th>
-		<th>Mapel Id</th>
+		<th>Mapel</th>
 		<th>Soal</th>
 		<th>Action</th>
             </tr><?php

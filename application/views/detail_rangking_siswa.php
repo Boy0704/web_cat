@@ -46,20 +46,93 @@
             $siswa_data= $this->db->query($sql)->result();
             foreach ($siswa_data as $siswa)
             {
+                $cek_user_id = $this->db->get_where('rangking', array('user_id'=>$siswa->user_id));
+
+                // echo cek_nilai_permapel($siswa->skor_id, $siswa->user_id, 4); exit;
+                $data_rangking_update = '';
+
+                if (cek_nilai_permapel($siswa->skor_id, $siswa->user_id, 1) == '0' && cek_nilai_permapel($siswa->skor_id, $siswa->user_id, 2) == '0' && cek_nilai_permapel($siswa->skor_id, $siswa->user_id, 3) == '0') {
+                    $data_rangking_update = array(
+                        'tbi' => cek_nilai_permapel($siswa->skor_id, $siswa->user_id, 4),
+                        'tpa' => cek_nilai_permapel($siswa->skor_id, $siswa->user_id, 5)
+                    );
+                } else if (cek_nilai_permapel($siswa->skor_id, $siswa->user_id, 4) == '0' && cek_nilai_permapel($siswa->skor_id, $siswa->user_id, 5) == '0') {
+                    $data_rangking_update = array(
+                        'tiu' => cek_nilai_permapel($siswa->skor_id, $siswa->user_id, 1),
+                        'tkp' => cek_nilai_permapel($siswa->skor_id, $siswa->user_id, 2),
+                        'twk' => cek_nilai_permapel($siswa->skor_id, $siswa->user_id, 3),
+                    );
+                }
+                
+
+                // $data_rangking_update = array(
+                //     'user_id' => $siswa->user_id,
+                //     'nama' => $siswa->nama_lengkap,
+                //     if (cek_nilai_permapel($siswa->skor_id, $siswa->user_id, 1) == 0) {}else{
+                //         'tiu'=> cek_nilai_permapel($siswa->skor_id, $siswa->user_id, 1),
+                //     }
+                //     if (cek_nilai_permapel($siswa->skor_id, $siswa->user_id, 2) == 0) {}else{
+                //         'tiu'=> cek_nilai_permapel($siswa->skor_id, $siswa->user_id, 2),
+                //     }
+                //     if (cek_nilai_permapel($siswa->skor_id, $siswa->user_id, 3) == 0) {}else{
+                //         'tiu'=> cek_nilai_permapel($siswa->skor_id, $siswa->user_id, 3),
+                //     }
+                //     if (cek_nilai_permapel($siswa->skor_id, $siswa->user_id, 4) == 0) {}else{
+                //         'tiu'=> cek_nilai_permapel($siswa->skor_id, $siswa->user_id, 4),
+                //     }
+                //     if (cek_nilai_permapel($siswa->skor_id, $siswa->user_id, 5) == 0) {}else{
+                //         'tiu'=> cek_nilai_permapel($siswa->skor_id, $siswa->user_id, 5),
+                //     }
+
+                // );
+
+                $data_rangking_input = array(
+                    'user_id' => $siswa->user_id,
+                    'nama' => $siswa->nama_lengkap,
+                    'tiu' => cek_nilai_permapel($siswa->skor_id, $siswa->user_id, 1),
+                    'tkp' => cek_nilai_permapel($siswa->skor_id, $siswa->user_id, 2),
+                    'twk' => cek_nilai_permapel($siswa->skor_id, $siswa->user_id, 3),
+                    'tbi' => cek_nilai_permapel($siswa->skor_id, $siswa->user_id, 4),
+                    'tpa' => cek_nilai_permapel($siswa->skor_id, $siswa->user_id, 5),
+                    'total'=> $siswa->total_nilai
+                );
+                if ($cek_user_id->num_rows() > 0) {
+                    //update data rangking
+                    $this->db->where('user_id', $siswa->user_id);
+                    $this->db->get('rangking', $data_rangking_update);
+                } else {
+                    $this->db->insert('rangking', $data_rangking_input);
+                }
+            }
+
+                //ambil data rangking
+                foreach ($this->db->get('rangking')->result() as $row) {
                 ?>
                 <tr>
 			<td width="80px"><?php echo ++$start ?></td>
-            <td><?php echo $siswa->nama_lengkap ?></td>
+            <td><?php echo $row->nama ?></td>
 
             <!-- revisi baru -->
-            <td><?php echo cek_nilai_permapel($siswa->skor_id, $siswa->user_id, 1) ?></td>
+            <!-- <td><?php echo cek_nilai_permapel($siswa->skor_id, $siswa->user_id, 1) ?></td>
             <td><?php echo cek_nilai_permapel($siswa->skor_id, $siswa->user_id, 2) ?></td>
             <td><?php echo cek_nilai_permapel($siswa->skor_id, $siswa->user_id, 3) ?></td>
             <td><?php echo cek_nilai_permapel($siswa->skor_id, $siswa->user_id, 4) ?></td>
             <td><?php echo cek_nilai_permapel($siswa->skor_id, $siswa->user_id, 5) ?></td>
             <td><?php echo cek_nilai_permapel($siswa->skor_id, $siswa->user_id, 1)+cek_nilai_permapel($siswa->skor_id, $siswa->user_id, 2)+cek_nilai_permapel($siswa->skor_id, $siswa->user_id, 3) ?></td>
             <td><?php echo cek_nilai_permapel($siswa->skor_id, $siswa->user_id, 4)+cek_nilai_permapel($siswa->skor_id, $siswa->user_id, 5) ?></td>
-            <td><?php echo $siswa->total_nilai ?></td>
+            <td><?php echo $siswa->total_nilai ?></td> -->
+
+            <!-- revisi kedua -->
+
+            <td><?php echo $row->tiu ?></td>
+            <td><?php echo $row->tkp ?></td>
+            <td><?php echo $row->twk ?></td>
+            <td><?php echo $row->tbi ?></td>
+            <td><?php echo $row->tpa ?></td>
+            <td><?php echo $row->tiu+$row->tkp+$row->twk ?></td>
+            <td><?php echo $row->tbi+$row->tpa ?></td>
+            <td><?php echo $row->total ?></td>
+
             <!-- <td><?php echo $siswa->paket_soal ?></td>
 			<td><?php echo $siswa->total_nilai ?></td>
 			<td style="text-align:center" width="200px">
