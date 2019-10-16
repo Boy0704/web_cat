@@ -168,7 +168,7 @@ class App extends CI_Controller {
     		$data = array(
 	    		'nilai' => $bobot,
 	    		'jawaban' => $jawaban,
-	    		'waktu' => date('Y-m-d H:i:s')
+	    		'waktu' => date("Y-m-d H:i:s", mktime(date("H")+1, date("i"), date("s"), date("m"), date("d"), date("Y")))
 	    	);
 	    	$this->db->where('user_id', $user_id);
 	    	$this->db->where('soal_id', $soal_id);
@@ -336,7 +336,7 @@ class App extends CI_Controller {
         /***************************************************
 		   * Only these origins are allowed to upload images *
 		   ***************************************************/
-		  $accepted_origins = array("http://localhost", "http://192.168.100.6", "http://jualkoding.com");
+		  $accepted_origins = array("http://localhost", "http://192.168.100.6", "http://jualkoding.com", "http://bimbel.catinstancy.co.id");
 
 		  /*********************************************
 		   * Change this line to set the upload folder *
@@ -471,6 +471,29 @@ and skor_detail.butir_soal_id=butir_soal.butir_soal_id and skor.user_id='$user_i
             'konten' => 'ujian_selesai',
     	);
     	$this->load->view('v_index', $data);
+	}
+
+	public function reset_siswa()
+	{
+		$data = array(
+    		'judul_page' => 'Reset Ujian Siswa',
+            'konten' => 'reset_siswa',
+    	);
+    	$this->load->view('v_index', $data);
+	}
+
+	public function aksi_reset($user_id)
+	{
+		$this->db->where('user_id', $user_id);
+		$this->db->delete('skor');
+		$this->db->where('user_id', $user_id);
+		$this->db->delete('skor_detail');
+		?>
+		<script type="text/javascript">
+			alert("RESET UJIAN SISWA BERHASIL .!");
+			window.location="<?php echo base_url() ?>app/reset_siswa";
+		</script>
+		<?php
 	}
 
 	public function update_profil()

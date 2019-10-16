@@ -5,7 +5,7 @@
             <input type="text" class="form-control" name="paket_soal" id="paket_soal" placeholder="Paket Soal" value="<?php echo $paket_soal; ?>" />
         </div>
 	    <div class="form-group">
-            <label for="int">Batch Id <?php echo form_error('batch_id') ?></label>
+            <label for="int">Batch Id </label>
             <!-- <input type="text" class="form-control" name="batch_id" id="batch_id" placeholder="Batch Id" value="<?php echo $batch_id; ?>" /> -->
             <select name="batch_id" class="form-control">
                 <option value="<?php echo $batch_id ?>"><?php echo $batch_id ?></option>
@@ -13,7 +13,7 @@
                 $data = $this->db->get('batch');
                 foreach ($data->result() as $row) {
                  ?>
-                <option value="<?php echo $batch_id ?>"><?php echo $row->batch_id.'-'.$row->nama_batch ?></option>
+                <option value="<?php echo $row->batch_id ?>"><?php echo $row->batch_id.'-'.$row->nama_batch ?></option>
                 <?php } ?>
             </select>
         </div>

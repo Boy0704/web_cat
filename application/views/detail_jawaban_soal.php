@@ -38,7 +38,7 @@ $nama_soal = $this->db->query("SELECT soal.soal, mapel.mapel, mapel.nilai_lulus 
 		<td><?php echo $no; ?></td>
 		<td><?php echo $row->pertanyaan ?></td>
 		<td><?php echo $row->jawaban ?></td>
-		<td><?php echo $row->nilai ?></td>
+		<td><?php echo jawaban_benar($row->butir_soal_id) ?></td>
 	</tr>
 <?php $no++; } ?>
 </table>

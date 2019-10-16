@@ -67,6 +67,12 @@
               <span>Pengaturan</span>
               </a>
           </li>
+          <li>
+            <a href="app/reset_siswa">
+              <i class="fa fa-suitcase"></i>
+              <span>Reset Siswa</span>
+              </a>
+          </li>
           
           <!-- <li>
             <a href="#">

@@ -174,7 +174,7 @@ class Paket_soal extends CI_Controller
     public function _rules() 
     {
 	$this->form_validation->set_rules('paket_soal', 'paket soal', 'trim|required');
-	$this->form_validation->set_rules('batch_id', 'batch id', 'trim|required');
+	// $this->form_validation->set_rules('batch_id', 'batch id', 'trim|required');
 	// $this->form_validation->set_rules('user_id_tambah', 'user id tambah', 'trim|required');
 	// $this->form_validation->set_rules('waktu_tambah', 'waktu tambah', 'trim|required');
 	// $this->form_validation->set_rules('user_id_ubah', 'user id ubah', 'trim|required');

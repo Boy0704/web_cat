@@ -72,3 +72,20 @@ function cek_status($status)
 		return "<span class=\"label label-danger\">Tidak Aktif</span>";
 	}
 }
+
+function jawaban_benar($butir_soal_id)
+{
+	$CI 	=& get_instance();
+	$d =$CI->db->get_where('butir_soal', array('butir_soal_id'=>$butir_soal_id))->row();
+	if ($d->bobot_jawaban1 >= 5) {
+		return $d->jawaban1;
+	} elseif ($d->bobot_jawaban2 >= 5) {
+		return $d->jawaban2;
+	} elseif ($d->bobot_jawaban3 >= 5) {
+		return $d->jawaban3;
+	} elseif ($d->bobot_jawaban4 >= 5) {
+		return $d->jawaban4;
+	} elseif ($d->bobot_jawaban5 >= 5) {
+		return $d->jawaban5;
+	}
+}
