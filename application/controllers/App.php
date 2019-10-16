@@ -119,11 +119,16 @@ class App extends CI_Controller {
     			$this->db->update('skor', array('status'=> 1, 'waktu_selesai'=>$waktu_mulai));
 
     			//hapus akses batch ujian
-    			$get_paket_soal_id = $this->db->get('skor', array('skor_id'=>$skor_id))->row()->paket_soal_id;
-    			$get_batch_id = $this->db->get('paket_soal', array('paket_soal_id'=>$get_paket_soal_id))->row()->batch_id;
-    			$this->db->where('batch_id', $get_batch_id);
-    			$this->db->where('paket_soal_id', $get_paket_soal_id);
-    			$this->db->where('user_id', $this->session->userdata('id_user'));
+    			$get_paket_soal_id = $this->db->get_where('skor', array('skor_id'=>$skor_id))->row()->paket_soal_id;
+    			$get_batch_id = $this->db->get_where('paket_soal', array('paket_soal_id'=>$get_paket_soal_id))->row()->batch_id;
+    			$get_id_x = $this->db->query("SELECT id_x FROM akses_batch where user_id='$userid' and paket_soal_id='$get_paket_soal_id' ")->row()->id_x;
+    			// echo $skor_id.'<br>';
+    			// echo $get_paket_soal_id.'<br>';
+    			// echo $get_batch_id.'<br>';
+    			// echo $userid.'<br>';
+    			// echo $get_id_x.'<br>';
+    			// exit;
+    			$this->db->where('id_x', $get_id_x);
     			$this->db->delete('akses_batch');
 
 				?>
