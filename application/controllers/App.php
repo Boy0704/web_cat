@@ -21,7 +21,7 @@ class App extends CI_Controller {
     	$userid = $this->session->userdata('id_user');
     	$data = array(
     		'userid' => $userid,
-    		'query' => $this->db->query("SELECT * FROM batch, akses_batch where batch.batch_id=akses_batch.batch_id and akses_batch.user_id=$userid "),
+    		'query' => $this->db->query("SELECT * FROM batch, akses_batch where batch.batch_id=akses_batch.batch_id and akses_batch.user_id=$userid GROUP BY batch.batch_id "),
     		'judul_page' => 'List Batch',
             'konten' => 'soal_siswa/list_batch',
     	);
@@ -31,9 +31,11 @@ class App extends CI_Controller {
     public function paket_soal($batch_id)
     {
     	$userid = $this->session->userdata('id_user');
+    	$batchid = base64_decode($batch_id);
     	$data = array(
     		'userid' => $userid,
-    		'query' => $this->db->get_where('paket_soal', array('batch_id'=>base64_decode($batch_id))),
+    		// 'query' => $this->db->get_where('akses_batch', array('batch_id'=>base64_decode($batch_id))),
+    		'query' => $this->db->query("SELECT * FROM akses_batch, paket_soal where akses_batch.paket_soal_id=paket_soal.paket_soal_id and akses_batch.batch_id='$batchid' "),
     		'judul_page' => 'Paket Soal',
             'konten' => 'soal_siswa/paket_soal',
     	);
@@ -120,6 +122,7 @@ class App extends CI_Controller {
     			$get_paket_soal_id = $this->db->get('skor', array('skor_id'=>$skor_id))->row()->paket_soal_id;
     			$get_batch_id = $this->db->get('paket_soal', array('paket_soal_id'=>$get_paket_soal_id))->row()->batch_id;
     			$this->db->where('batch_id', $get_batch_id);
+    			$this->db->where('paket_soal_id', $get_paket_soal_id);
     			$this->db->where('user_id', $this->session->userdata('id_user'));
     			$this->db->delete('akses_batch');
 
@@ -225,7 +228,15 @@ class App extends CI_Controller {
     		$userid = $this->input->post('userid');
     		$cekbatch = $this->db->get_where('akses_batch',array('user_id'=>$userid,'batch_id'=>$batch_id));
     		if ($cekbatch->num_rows() == 0) {
-    			$this->db->insert('akses_batch', array('user_id'=>$userid,'batch_id'=>$batch_id));
+    			//select paket
+    			$paket = $this->db->get_where('paket_soal', array('batch_id'=>$batch_id));
+    			foreach ($paket->result() as $value) {
+    				// echo $value->paket_soal_id;
+    				$this->db->insert('akses_batch', array('user_id'=>$userid,'batch_id'=>$batch_id,'paket_soal_id'=>$value->paket_soal_id));
+    			}
+
+    			// exit;
+    			
     			redirect('app/akses_batch/'.$batch_id,'refresh');
     		} else {
     			#tidak melakukan apapun
