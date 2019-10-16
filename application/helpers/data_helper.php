@@ -77,15 +77,47 @@ function jawaban_benar($butir_soal_id)
 {
 	$CI 	=& get_instance();
 	$d =$CI->db->get_where('butir_soal', array('butir_soal_id'=>$butir_soal_id))->row();
-	if ($d->bobot_jawaban1 >= 5) {
+	if ($d->bobot_jawaban1 >= 4) {
 		return $d->jawaban1;
-	} elseif ($d->bobot_jawaban2 >= 5) {
+	} elseif ($d->bobot_jawaban2 >= 4) {
 		return $d->jawaban2;
-	} elseif ($d->bobot_jawaban3 >= 5) {
+	} elseif ($d->bobot_jawaban3 >= 4) {
 		return $d->jawaban3;
-	} elseif ($d->bobot_jawaban4 >= 5) {
+	} elseif ($d->bobot_jawaban4 >= 4) {
 		return $d->jawaban4;
-	} elseif ($d->bobot_jawaban5 >= 5) {
+	} elseif ($d->bobot_jawaban5 >= 4) {
 		return $d->jawaban5;
 	}
+}
+
+function select_jawaban($butir_soal_id, $user_id)
+{
+	$CI 	=& get_instance();
+	$jawaban =$CI->db->get_where('skor_detail', array('butir_soal_id'=>$butir_soal_id,'user_id'=>$user_id));
+	if ($jawaban->num_rows() == 0) {
+		return '';
+	} else {
+		$j = $jawaban->row();
+		return $j->jawaban;
+	}
+	
+}
+
+function cek_btn_soal($butir_soal_id, $user_id)
+{
+	$CI 	=& get_instance();
+	$btn =$CI->db->get_where('skor_detail', array('butir_soal_id'=>$butir_soal_id,'user_id'=>$user_id));
+	if ($btn->num_rows() == 0) {
+		return 'btn btn-default';
+	} else {
+		return 'btn btn-success';
+	}
+	
+}
+
+function get_nama_soal($soal_id)
+{
+	$CI 	=& get_instance();
+	$nm = $CI->db->get_where('soal', array('soal_id'=>$soal_id))->row()->soal;
+	return $nm;
 }

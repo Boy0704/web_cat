@@ -257,6 +257,8 @@ class App extends CI_Controller {
 
     public function ambil_soal_ujian($butir_soal_id, $no_soal)
     {
+    	$select = "";
+    	$user_id = $this->session->userdata('id_user');
     	$ambil = $this->db->get_where('butir_soal', array('butir_soal_id'=>$butir_soal_id))->row();
     	?>
     	<div style="font-size: 12pt; font-family: Arial">
@@ -271,37 +273,62 @@ class App extends CI_Controller {
 		    		<form>
 		    			<?php 
 		    			if ($ambil->jawaban1 == '') { } else {
+		    				if (select_jawaban($butir_soal_id, $user_id) == $ambil->jawaban1) {
+		    					$select = "checked";
+		    				} else {
+		    					$select = "";
+		    				}
 		    			?>
 		    			<div class="radio">
-					      <label><input type="radio" name="jwb" nilai="<?php echo $ambil->bobot_jawaban1 ?>" value="<?php echo $ambil->jawaban1 ?>" butir_soal_id="<?php echo $butir_soal_id ?>"><?php echo $ambil->jawaban1 ?></label>
+					      <label><input type="radio" name="jwb" nilai="<?php echo $ambil->bobot_jawaban1 ?>" value="<?php echo $ambil->jawaban1 ?>" butir_soal_id="<?php echo $butir_soal_id ?>" <?php echo $select ?>><?php echo $ambil->jawaban1 ?></label>
 					    </div>
 						<?php } ?>
 						<?php 
 		    			if ($ambil->jawaban2 == '') { } else {
+		    				if (select_jawaban($butir_soal_id, $user_id) == $ambil->jawaban2) {
+		    					$select = "checked";
+		    				} else {
+		    					$select = "";
+		    				}
 		    			?>
 		    			<div class="radio">
-					      <label><input type="radio" name="jwb" nilai="<?php echo $ambil->bobot_jawaban2 ?>" value="<?php echo $ambil->jawaban2 ?>" butir_soal_id="<?php echo $butir_soal_id ?>"><?php echo $ambil->jawaban2 ?></label>
+					      <label><input type="radio" name="jwb" nilai="<?php echo $ambil->bobot_jawaban2 ?>" value="<?php echo $ambil->jawaban2 ?>" butir_soal_id="<?php echo $butir_soal_id ?>" <?php echo $select ?>><?php echo $ambil->jawaban2 ?></label>
 					    </div>
 						<?php } ?>
 						<?php 
 		    			if ($ambil->jawaban3 == '') { } else {
+		    				if (select_jawaban($butir_soal_id, $user_id) == $ambil->jawaban3) {
+		    					$select = "checked";
+		    				} else {
+		    					$select = "";
+		    				}
 		    			?>
 		    			<div class="radio">
-					      <label><input type="radio" name="jwb" nilai="<?php echo $ambil->bobot_jawaban3 ?>" value="<?php echo $ambil->jawaban3 ?>" butir_soal_id="<?php echo $butir_soal_id ?>"><?php echo $ambil->jawaban3 ?></label>
+					      <label><input type="radio" name="jwb" nilai="<?php echo $ambil->bobot_jawaban3 ?>" value="<?php echo $ambil->jawaban3 ?>" butir_soal_id="<?php echo $butir_soal_id ?>" <?php echo $select ?>><?php echo $ambil->jawaban3 ?></label>
 					    </div>
 						<?php } ?>
 						<?php 
 		    			if ($ambil->jawaban4 == '') { } else {
+		    				if (select_jawaban($butir_soal_id, $user_id) == $ambil->jawaban4) {
+		    					$select = "checked";
+		    				} else {
+		    					$select = "";
+		    				}
 		    			?>
 		    			<div class="radio">
-					      <label><input type="radio" name="jwb" nilai="<?php echo $ambil->bobot_jawaban4 ?>" value="<?php echo $ambil->jawaban4 ?>" butir_soal_id="<?php echo $butir_soal_id ?>"><?php echo $ambil->jawaban4 ?></label>
+					      <label><input type="radio" name="jwb" nilai="<?php echo $ambil->bobot_jawaban4 ?>" value="<?php echo $ambil->jawaban4 ?>" butir_soal_id="<?php echo $butir_soal_id ?>" <?php echo $select ?>><?php echo $ambil->jawaban4 ?></label>
 					    </div>
 						<?php } ?>
 						<?php 
 		    			if ($ambil->jawaban5 == '') { } else {
+		    				if (select_jawaban($butir_soal_id, $user_id) == $ambil->jawaban5) {
+		    					$select = "checked";
+		    				} else {
+		    					$select = "";
+		    				}
 		    			?>
 		    			<div class="radio">
-					      <label><input type="radio" name="jwb" nilai="<?php echo $ambil->bobot_jawaban5 ?>" value="<?php echo $ambil->jawaban5 ?>" butir_soal_id="<?php echo $butir_soal_id ?>"><?php echo $ambil->jawaban5 ?></label>
+					      <label><input type="radio" name="jwb" nilai="<?php echo $ambil->bobot_jawaban5 ?>" value="<?php echo $ambil->jawaban5 ?>" butir_soal_id="<?php echo $butir_soal_id ?>" <?php echo $select ?>><?php echo $ambil->jawaban5 ?></label>
 					    </div>
 						<?php } ?>
 						

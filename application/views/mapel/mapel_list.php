@@ -44,7 +44,7 @@
                 <tr>
 			<td width="80px"><?php echo ++$start ?></td>
 			<td><?php echo $mapel->mapel ?></td>
-			<td><?php echo kat_mapel($mapel->mapel_kategori) ?></td>
+			<td><?php echo $mapel->mapel_kategori ?></td>
 			<td><?php echo $mapel->operator ?></td>
 			<td><?php echo $mapel->nilai_lulus ?></td>
 			<td style="text-align:center" width="200px">

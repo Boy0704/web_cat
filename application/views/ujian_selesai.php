@@ -2,8 +2,8 @@
             <thead>
             <tr>
                 <th>No</th>
+                <th>Batch Soal</th>
 				<th>Paket Soal</th>
-				<th>Batch Soal</th>
 				<th>Action</th>
             </tr>
             </thead>

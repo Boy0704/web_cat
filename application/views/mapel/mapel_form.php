@@ -8,12 +8,12 @@
             <label for="enum">Mapel Kategori <?php echo form_error('mapel_kategori') ?></label>
             <!-- <input type="text" class="form-control" name="mapel_kategori" id="mapel_kategori" placeholder="Mapel Kategori" value="<?php echo $mapel_kategori; ?>" /> -->
             <select name="mapel_kategori" class="form-control">
-                <option value="<?php echo $mapel_kategori ?>"><?php echo kat_mapel($mapel_kategori) ?></option>
+                <option value="<?php echo $mapel_kategori ?>"><?php echo $mapel_kategori ?></option>
                 <?php 
-                $pengaturan = $this->db->get('pengaturan',2, 2);
+                $pengaturan = $this->db->get('pengaturan',4, 2);
                 foreach ($pengaturan->result() as $vl) {
                  ?>
-                <option value="<?php echo $vl->pengaturan_id ?>"><?php echo kat_mapel($vl->pengaturan_id).'-'.$vl->pengaturan ?></option>
+                <option value="<?php echo $vl->pengaturan_id ?>"><?php echo $vl->pengaturan_id.'-'.$vl->pengaturan ?></option>
             <?php } ?>
             </select>
         </div>
