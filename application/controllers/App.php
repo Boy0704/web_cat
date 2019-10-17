@@ -379,7 +379,7 @@ class App extends CI_Controller {
         /***************************************************
 		   * Only these origins are allowed to upload images *
 		   ***************************************************/
-		  $accepted_origins = array("http://localhost", "http://192.168.100.6", "http://jualkoding.com", "http://bimbel.catinstancy.co.id");
+		  $accepted_origins = array("http://localhost", "http://192.168.100.6", "http://jualkoding.com", "https://ujian.catinstancy.co.id");
 
 		  /*********************************************
 		   * Change this line to set the upload folder *
