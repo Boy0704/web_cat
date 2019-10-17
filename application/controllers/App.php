@@ -35,7 +35,7 @@ class App extends CI_Controller {
     	$data = array(
     		'userid' => $userid,
     		// 'query' => $this->db->get_where('akses_batch', array('batch_id'=>base64_decode($batch_id))),
-    		'query' => $this->db->query("SELECT * FROM akses_batch, paket_soal where akses_batch.paket_soal_id=paket_soal.paket_soal_id and akses_batch.batch_id='$batchid' "),
+    		'query' => $this->db->query("SELECT * FROM akses_batch, paket_soal where akses_batch.paket_soal_id=paket_soal.paket_soal_id and akses_batch.batch_id='$batchid' and akses_batch.user_id='$userid' "),
     		'judul_page' => 'Paket Soal',
             'konten' => 'soal_siswa/paket_soal',
     	);
