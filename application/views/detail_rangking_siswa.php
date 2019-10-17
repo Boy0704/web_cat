@@ -1,18 +1,16 @@
 <table class="table table-bordered tabel-data" style="margin-bottom: 10px">
             <thead>
             <tr>
-                <th>Peringkat</th>
-                <th>Nama Siswa</th>
-
-                <?php 
-                foreach ($this->db->get('mapel')->result() as $key) {
-                 ?>
-                <th><?php echo $key->mapel ?></th>
-            <?php } ?>
-                <th>SKD (TWK+TIU+TKP)</th>
-                <th>(TPA+TBI)</th>
-				<th>Total Nilai</th>
-				<!-- <th>Action</th> -->
+                <th>Peringkat <i class="fa fa-unsorted"></i></th>
+                <th>Nama Siswa <i class="fa fa-unsorted"></i></th>
+                <th>SKD (TWK+TIU+TKP) <i class="fa fa-unsorted"></i></th>
+                
+                <th><?php echo $this->db->get_where('mapel',array('mapel_id'=>5))->row()->mapel ?> <i class="fa fa-unsorted"></i></th>
+                <th><?php echo $this->db->get_where('mapel',array('mapel_id'=>4))->row()->mapel ?> <i class="fa fa-unsorted"></i></th>
+                
+                <th>(TPA+TBI) <i class="fa fa-unsorted"></i></th>
+				<th>Total Nilai <i class="fa fa-unsorted"></i></th>
+				<th>Keterangan</th>
             </tr>
             </thead>
             <tbody>
@@ -140,14 +138,16 @@
 
             <!-- revisi kedua -->
 
-            <td><?php echo $row->tiu ?></td>
-            <td><?php echo $row->tkp ?></td>
-            <td><?php echo $row->twk ?></td>
-            <td><?php echo $row->tbi ?></td>
-            <td><?php echo $row->tpa ?></td>
             <td><?php echo $row->tiu+$row->tkp+$row->twk ?></td>
+            <!-- <td><?php echo $row->tiu ?></td>
+            <td><?php echo $row->tkp ?></td>
+            <td><?php echo $row->twk ?></td> -->
+            <td><?php echo $row->tpa ?></td>
+            <td><?php echo $row->tbi ?></td>
             <td><?php echo $row->tbi+$row->tpa ?></td>
             <td><?php echo $row->total ?></td>
+            <td><?php echo ket_lulus($row->total) ?></td>
+
 
             <!-- <td><?php echo $siswa->paket_soal ?></td>
 			<td><?php echo $siswa->total_nilai ?></td>

@@ -255,6 +255,13 @@ class App extends CI_Controller {
     	}
     }
 
+    public function delete_akses_batch($user_id,$batch_id)
+    {
+    	$this->db->where('user_id', $user_id);
+    	$this->db->delete('akses_batch');
+    	redirect('app/akses_batch/'.$batch_id,'refresh');
+    }
+
     public function ambil_soal_ujian($butir_soal_id, $no_soal)
     {
     	$select = "";

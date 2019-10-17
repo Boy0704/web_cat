@@ -139,3 +139,19 @@ function filter_string($n)
 	$hasil = str_replace('"', "'", $n);
 	return $hasil;
 }
+
+function cek_nilai_lulus()
+{	
+	$CI 	=& get_instance();
+	$nilai = $CI->db->query("SELECT sum(nilai_lulus) as lulus FROM mapel ")->lulus;
+	return $nilai;
+}
+
+function ket_lulus($total)
+{
+	if ($total >= cek_nilai_lulus()) {
+		return "<span class=\"label label-success\">LULUS</span> ";
+	} else {
+		return "<span class=\"label label-danger\">TIDAK LULUS</span> ";
+	}
+}

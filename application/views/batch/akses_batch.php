@@ -26,7 +26,7 @@
 					<button type="submit" class="btn btn-primary btn-xs">Pilih</button>
 				</form>
 			<?php } else { ?>
-				<span class="label label-success">Terpilih</span>
+				<a href="app/delete_akses_batch/<?php echo $siswa->user_id.'/'.$this->uri->segment(3) ?>"><span class="label label-success">Terpilih</span></a>
 			<?php } ?>
 			</td>
 		</tr>
