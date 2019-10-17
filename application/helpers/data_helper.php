@@ -133,3 +133,9 @@ function get_soal_paket($paket_soal_id)
 	return $nilai;
 
 } 
+
+function filter_string($n)
+{
+	$hasil = str_replace('"', "'", $n);
+	return $hasil;
+}

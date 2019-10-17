@@ -280,7 +280,7 @@ class App extends CI_Controller {
 		    				}
 		    			?>
 		    			<div class="radio">
-					      <label><input type="radio" name="jwb" nilai="<?php echo $ambil->bobot_jawaban1 ?>" value="<?php echo $ambil->jawaban1 ?>" butir_soal_id="<?php echo $butir_soal_id ?>" <?php echo $select ?>><?php echo $ambil->jawaban1 ?></label>
+					      <label><input type="radio" name="jwb" nilai="<?php echo $ambil->bobot_jawaban1 ?>" value="<?php echo filter_string($ambil->jawaban1) ?>" butir_soal_id="<?php echo $butir_soal_id ?>" <?php echo $select ?>><?php echo $ambil->jawaban1 ?></label>
 					    </div>
 						<?php } ?>
 						<?php 
@@ -292,7 +292,7 @@ class App extends CI_Controller {
 		    				}
 		    			?>
 		    			<div class="radio">
-					      <label><input type="radio" name="jwb" nilai="<?php echo $ambil->bobot_jawaban2 ?>" value="<?php echo $ambil->jawaban2 ?>" butir_soal_id="<?php echo $butir_soal_id ?>" <?php echo $select ?>><?php echo $ambil->jawaban2 ?></label>
+					      <label><input type="radio" name="jwb" nilai="<?php echo $ambil->bobot_jawaban2 ?>" value="<?php echo filter_string($ambil->jawaban2) ?>" butir_soal_id="<?php echo $butir_soal_id ?>" <?php echo $select ?>><?php echo $ambil->jawaban2 ?></label>
 					    </div>
 						<?php } ?>
 						<?php 
@@ -304,7 +304,7 @@ class App extends CI_Controller {
 		    				}
 		    			?>
 		    			<div class="radio">
-					      <label><input type="radio" name="jwb" nilai="<?php echo $ambil->bobot_jawaban3 ?>" value="<?php echo $ambil->jawaban3 ?>" butir_soal_id="<?php echo $butir_soal_id ?>" <?php echo $select ?>><?php echo $ambil->jawaban3 ?></label>
+					      <label><input type="radio" name="jwb" nilai="<?php echo $ambil->bobot_jawaban3 ?>" value="<?php echo filter_string($ambil->jawaban3) ?>" butir_soal_id="<?php echo $butir_soal_id ?>" <?php echo $select ?>><?php echo $ambil->jawaban3 ?></label>
 					    </div>
 						<?php } ?>
 						<?php 
@@ -316,7 +316,7 @@ class App extends CI_Controller {
 		    				}
 		    			?>
 		    			<div class="radio">
-					      <label><input type="radio" name="jwb" nilai="<?php echo $ambil->bobot_jawaban4 ?>" value="<?php echo $ambil->jawaban4 ?>" butir_soal_id="<?php echo $butir_soal_id ?>" <?php echo $select ?>><?php echo $ambil->jawaban4 ?></label>
+					      <label><input type="radio" name="jwb" nilai="<?php echo $ambil->bobot_jawaban4 ?>" value="<?php echo filter_string($ambil->jawaban4) ?>" butir_soal_id="<?php echo $butir_soal_id ?>" <?php echo $select ?>><?php echo $ambil->jawaban4 ?></label>
 					    </div>
 						<?php } ?>
 						<?php 
@@ -328,7 +328,7 @@ class App extends CI_Controller {
 		    				}
 		    			?>
 		    			<div class="radio">
-					      <label><input type="radio" name="jwb" nilai="<?php echo $ambil->bobot_jawaban5 ?>" value="<?php echo $ambil->jawaban5 ?>" butir_soal_id="<?php echo $butir_soal_id ?>" <?php echo $select ?>><?php echo $ambil->jawaban5 ?></label>
+					      <label><input type="radio" name="jwb" nilai="<?php echo $ambil->bobot_jawaban5 ?>" value="<?php echo filter_string($ambil->jawaban5) ?>" butir_soal_id="<?php echo $butir_soal_id ?>" <?php echo $select ?>><?php echo $ambil->jawaban5 ?></label>
 					    </div>
 						<?php } ?>
 						
