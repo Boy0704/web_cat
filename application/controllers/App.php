@@ -354,7 +354,7 @@ class App extends CI_Controller {
 			);
 			$this->load->view('v_index', $data);
     	} else {
-    		
+
     		$_POST['soal_id'] = $soal_id;
     		// print_r($_POST); exit;
     		$this->db->insert('butir_soal', $_POST);
@@ -541,6 +541,8 @@ and skor_detail.butir_soal_id=butir_soal.butir_soal_id and skor.user_id='$user_i
 		$this->db->delete('skor');
 		$this->db->where('user_id', $user_id);
 		$this->db->delete('skor_detail');
+		$this->db->where('user_id', $user_id);
+		$this->db->delete('akses_batch');
 		?>
 		<script type="text/javascript">
 			alert("RESET UJIAN SISWA BERHASIL .!");
