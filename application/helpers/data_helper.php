@@ -121,3 +121,15 @@ function get_nama_soal($soal_id)
 	$nm = $CI->db->get_where('soal', array('soal_id'=>$soal_id))->row()->soal;
 	return $nm;
 }
+
+function get_soal_paket($paket_soal_id)
+{
+	$CI 	=& get_instance();
+	$data = $CI->db->query("SELECT soal.soal FROM item_soal, soal where item_soal.soal_id=soal.soal_id and item_soal.paket_soal_id='$paket_soal_id' ");
+	$nilai = "";
+	foreach ($data->result() as $rw) {
+		$nilai .= "<span class=\"label label-info\">".$rw->soal."</span> ";
+	}
+	return $nilai;
+
+} 

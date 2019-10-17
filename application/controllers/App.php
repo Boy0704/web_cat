@@ -337,7 +337,7 @@ class App extends CI_Controller {
     		</div>
     		<ul class="pager">
 			    <!-- <li class="previous"><a style="cursor: pointer;" id="pager">Sebelumnya</a></li> -->
-			    <li><label><input type="checkbox" id="ragu" value="">Ragu-ragu</label></li>
+			    <!-- <li><label><input type="checkbox" id="ragu" value="">Ragu-ragu</label></li> -->
 			    <!-- <li class="next"><a style="cursor: pointer;" id="">Selanjutnya</a></li> -->
 			</ul>
     	</div>
@@ -430,7 +430,14 @@ class App extends CI_Controller {
 		    // Notify editor that the upload failed
 		    header("HTTP/1.1 500 Server Error");
 		  }
-    }
+	}
+	
+	public function simpan_soal_paket($paket_soal_id)
+	{
+		$soal_id = $_POST['soal'];
+		$this->db->insert('item_soal',array('paket_soal_id'=>$paket_soal_id,'soal_id'=>$soal_id));
+		redirect('paket_soal');
+	}
 
 	public function login() 
 	{

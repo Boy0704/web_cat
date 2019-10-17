@@ -34,6 +34,7 @@
                 <th>No</th>
 		<th>Paket Soal</th>
 		<th>Nama Batch</th>
+		<th>Soal dipaket ini</th>
 		<!-- <th>User Id Tambah</th>
 		<th>Waktu Tambah</th>
 		<th>User Id Ubah</th>
@@ -52,8 +53,10 @@
 			<td><?php echo $paket_soal->waktu_tambah ?></td>
 			<td><?php echo $paket_soal->user_id_ubah ?></td>
 			<td><?php echo $paket_soal->waktu_ubah ?></td> -->
+			<td><?php echo get_soal_paket($paket_soal->paket_soal_id) ?></td>
 			<td><?php echo cek_status($paket_soal->status_paket) ?></td>
 			<td style="text-align:center" width="200px">
+                <a href="#" data-toggle="modal" data-target="#myModal<?php echo $paket_soal->paket_soal_id ?>"><span class="label label-primary">Tambah Soal</span></a>
 				<?php 
 				echo anchor(site_url('paket_soal/update/'.$paket_soal->paket_soal_id),'<span class="label label-info">Ubah</span>'); 
 				echo ' | '; 
@@ -61,6 +64,40 @@
 				?>
 			</td>
 		</tr>
+
+        <!-- Modal -->
+        <div id="myModal<?php echo $paket_soal->paket_soal_id ?>" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Tambah Soal <?php echo $paket_soal->paket_soal ?></h4>
+            </div>
+            <div class="modal-body">
+               <form action="app/simpan_soal_paket/<?php echo $paket_soal->paket_soal_id ?>" method="post">
+                <label for="">Soal</label>
+                <select name="soal" class="form-control">
+                <?php 
+                $data = $this->db->get('soal');
+                foreach ($data->result() as $lv) {
+                ?>
+                    <option value="<?php echo $lv->soal_id ?>"><?php echo $lv->soal ?></option>
+                <?php } ?>
+                </select>
+                <button type="submit" class="btn btn-primary">Simpan</button>
+               </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+            </div>
+
+        </div>
+        </div>
+
                 <?php
             }
             ?>
