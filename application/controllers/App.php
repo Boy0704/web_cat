@@ -354,6 +354,9 @@ class App extends CI_Controller {
 			);
 			$this->load->view('v_index', $data);
     	} else {
+    		
+    		$_POST['soal_id'] = $soal_id;
+    		// print_r($_POST); exit;
     		$this->db->insert('butir_soal', $_POST);
     		redirect('soal/detail_soal/'.$soal_id,'refresh');
     	}
