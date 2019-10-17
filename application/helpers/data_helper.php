@@ -143,7 +143,7 @@ function filter_string($n)
 function cek_nilai_lulus()
 {	
 	$CI 	=& get_instance();
-	$nilai = $CI->db->query("SELECT sum(nilai_lulus) as lulus FROM mapel ")->lulus;
+	$nilai = $CI->db->query("SELECT sum(nilai_lulus) as lulus FROM mapel ")->row()->lulus;
 	return $nilai;
 }
 
