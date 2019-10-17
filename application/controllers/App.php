@@ -273,7 +273,7 @@ class App extends CI_Controller {
 		    		<form>
 		    			<?php 
 		    			if ($ambil->jawaban1 == '') { } else {
-		    				if (select_jawaban($butir_soal_id, $user_id) == $ambil->jawaban1) {
+		    				if (select_jawaban($butir_soal_id, $user_id) == filter_string($ambil->jawaban1)) {
 		    					$select = "checked";
 		    				} else {
 		    					$select = "";
@@ -285,7 +285,7 @@ class App extends CI_Controller {
 						<?php } ?>
 						<?php 
 		    			if ($ambil->jawaban2 == '') { } else {
-		    				if (select_jawaban($butir_soal_id, $user_id) == $ambil->jawaban2) {
+		    				if (select_jawaban($butir_soal_id, $user_id) == filter_string($ambil->jawaban2)) {
 		    					$select = "checked";
 		    				} else {
 		    					$select = "";
@@ -297,7 +297,7 @@ class App extends CI_Controller {
 						<?php } ?>
 						<?php 
 		    			if ($ambil->jawaban3 == '') { } else {
-		    				if (select_jawaban($butir_soal_id, $user_id) == $ambil->jawaban3) {
+		    				if (select_jawaban($butir_soal_id, $user_id) == filter_string($ambil->jawaban3)) {
 		    					$select = "checked";
 		    				} else {
 		    					$select = "";
@@ -309,7 +309,7 @@ class App extends CI_Controller {
 						<?php } ?>
 						<?php 
 		    			if ($ambil->jawaban4 == '') { } else {
-		    				if (select_jawaban($butir_soal_id, $user_id) == $ambil->jawaban4) {
+		    				if (select_jawaban($butir_soal_id, $user_id) == filter_string($ambil->jawaban4)) {
 		    					$select = "checked";
 		    				} else {
 		    					$select = "";
@@ -321,7 +321,7 @@ class App extends CI_Controller {
 						<?php } ?>
 						<?php 
 		    			if ($ambil->jawaban5 == '') { } else {
-		    				if (select_jawaban($butir_soal_id, $user_id) == $ambil->jawaban5) {
+		    				if (select_jawaban($butir_soal_id, $user_id) == filter_string($ambil->jawaban5)) {
 		    					$select = "checked";
 		    				} else {
 		    					$select = "";
