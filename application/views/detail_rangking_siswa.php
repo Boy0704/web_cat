@@ -3,8 +3,10 @@
             <tr>
                 <th>Peringkat <i class="fa fa-unsorted"></i></th>
                 <th>Nama Siswa <i class="fa fa-unsorted"></i></th>
+                <th><?php echo $this->db->get_where('mapel',array('mapel_id'=>1))->row()->mapel ?> <i class="fa fa-unsorted"></i></th>
+                <th><?php echo $this->db->get_where('mapel',array('mapel_id'=>2))->row()->mapel ?> <i class="fa fa-unsorted"></i></th>
+                <th><?php echo $this->db->get_where('mapel',array('mapel_id'=>3))->row()->mapel ?> <i class="fa fa-unsorted"></i></th>
                 <th>SKD (TWK+TIU+TKP) <i class="fa fa-unsorted"></i></th>
-                
                 <th><?php echo $this->db->get_where('mapel',array('mapel_id'=>5))->row()->mapel ?> <i class="fa fa-unsorted"></i></th>
                 <th><?php echo $this->db->get_where('mapel',array('mapel_id'=>4))->row()->mapel ?> <i class="fa fa-unsorted"></i></th>
                 
@@ -138,10 +140,11 @@
 
             <!-- revisi kedua -->
 
-            <td><?php echo $row->tiu+$row->tkp+$row->twk ?></td>
-            <!-- <td><?php echo $row->tiu ?></td>
+            
+            <td><?php echo $row->tiu ?></td>
             <td><?php echo $row->tkp ?></td>
-            <td><?php echo $row->twk ?></td> -->
+            <td><?php echo $row->twk ?></td> 
+            <td><?php echo $row->tiu+$row->tkp+$row->twk ?></td>
             <td><?php echo $row->tpa ?></td>
             <td><?php echo $row->tbi ?></td>
             <td><?php echo $row->tbi+$row->tpa ?></td>
