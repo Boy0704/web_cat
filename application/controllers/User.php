@@ -98,7 +98,7 @@ class User extends CI_Controller
 		'alamat' => $this->input->post('alamat',TRUE),
 		'no_hp' => $this->input->post('no_hp',TRUE),
 		'username' => $this->input->post('username',TRUE),
-		'password' => $this->input->post('password',TRUE),
+		'password' => md5($this->input->post('password',TRUE)),
 		'akses' => $this->input->post('akses',TRUE),
 	    );
 
@@ -147,7 +147,7 @@ class User extends CI_Controller
 		'alamat' => $this->input->post('alamat',TRUE),
 		'no_hp' => $this->input->post('no_hp',TRUE),
 		'username' => $this->input->post('username',TRUE),
-		'password' => $this->input->post('password',TRUE),
+		'password' => md5($this->input->post('password',TRUE)),
 		'akses' => $this->input->post('akses',TRUE),
 	    );
 
