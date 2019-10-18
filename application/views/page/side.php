@@ -114,7 +114,7 @@
               </a>
           </li>
           <li>
-            <a href="app/update_profil">
+            <a>
               <i class="fa fa-suitcase"></i>
               <span>Ubah Profil</span>
               </a>
