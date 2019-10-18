@@ -2,7 +2,7 @@
             <thead>
             <tr>
                 <th>No</th>
-				<th>Soal</th>
+				<th>Nama Siswa</th>
 				
 				<th>Action</th>
             </tr>

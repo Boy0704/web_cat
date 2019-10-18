@@ -13,9 +13,9 @@
             foreach ($siswa_data as $siswa)
             {
                 ?>
-                <tr>
+                <tr id="ID<?php echo $siswa->user_id ?>">
 			<td width="80px"><?php echo ++$start ?></td>
-			<td><?php echo $siswa->nama_lengkap ?></td>
+			<td ><?php echo $siswa->nama_lengkap ?></td>
 			<td style="text-align:center" width="200px">
 				<?php
 				$cekbatch = $this->db->get_where('akses_batch',array('user_id'=>$siswa->user_id,'batch_id'=>$this->uri->segment(3))); 

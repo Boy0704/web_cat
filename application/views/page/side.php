@@ -85,6 +85,43 @@
           } elseif ($this->session->userdata('level') == 'siswa') {
            ?>
 
+          
+          <?php 
+          if ($this->uri->segment(2) == 'soal_siswa') {
+           ?>
+           <li class="mt">
+            <a >
+              <i class="fa fa-dashboard"></i>
+              <span>Dashboard</span>
+              </a>
+          </li>
+          <li>
+            <a >
+              <i class="fa fa-paste"></i>
+              <span>Daftar Ujian</span>
+              </a>
+          </li>
+           <li>
+            <a >
+              <i class="fa fa-star-half-o"></i>
+              <span>Skor / Rangking</span>
+              </a>
+          </li>
+          <li>
+            <a >
+              <i class="fa fa-paperclip"></i>
+              <span>Ujian Selesai</span>
+              </a>
+          </li>
+          <li>
+            <a href="app/update_profil">
+              <i class="fa fa-suitcase"></i>
+              <span>Ubah Profil</span>
+              </a>
+          </li>
+           <?php
+         } else {
+          ?>
           <li class="mt">
             <a href="">
               <i class="fa fa-dashboard"></i>
@@ -115,7 +152,9 @@
               <span>Ubah Profil</span>
               </a>
           </li>
-          
+          <?php
+         }
+          ?>
           
 
 
