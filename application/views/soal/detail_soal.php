@@ -25,7 +25,8 @@ $soal_id = $this->uri->segment(3);
 			
 			<td style="text-align:center" width="200px">
 				<a href="app/ubah_butir_soal/<?php echo $soal->butir_soal_id ?>" class="btn btn-info">Ubah</a>
-			</td>
+                | <a href="app/hapus_butir_soal/<?php echo $soal->butir_soal_id.'/'.$soal_id ?>" class="btn btn-danger" onclick="javasciprt: return confirm('Are You Sure ?')">Hapus</a>
+            </td>
 		</tr>
                 <?php
             }

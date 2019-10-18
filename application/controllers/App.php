@@ -383,6 +383,14 @@ class App extends CI_Controller {
     		redirect('app/ubah_butir_soal/'.$butir_soal_id,'refresh');
     	}
     	
+	}
+	
+	public function hapus_butir_soal($butir_soal_id,$soal_id)
+    {
+		$this->db->where('butir_soal_id',$butir_soal_id);
+		$this->db->delete('butir_soal');
+		redirect('soal/detail_soal/'.$soal_id,'refresh');
+    	
     }
 
     function tinymce_upload() {
