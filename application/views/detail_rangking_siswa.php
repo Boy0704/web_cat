@@ -149,7 +149,7 @@
             <td><?php echo $row->tbi ?></td>
             <td><?php echo $row->tbi+$row->tpa ?></td>
             <td><?php echo $row->total ?></td>
-            <td><?php echo ket_lulus($row->total) ?></td>
+            <td><?php echo ket_lulus($row->tiu,$row->tkp,$row->twk,$row->tbi,$row->tpa) ?></td>
 
 
             <!-- <td><?php echo $siswa->paket_soal ?></td>

@@ -140,16 +140,17 @@ function filter_string($n)
 	return $hasil;
 }
 
-function cek_nilai_lulus()
+function cek_nilai_lulus($id)
 {	
 	$CI 	=& get_instance();
-	$nilai = $CI->db->query("SELECT sum(nilai_lulus) as lulus FROM mapel ")->row()->lulus;
+	$nilai = $CI->db->query("SELECT nilai_lulus as lulus FROM mapel where mapel_id='$id' ")->row()->lulus;
 	return $nilai;
 }
 
-function ket_lulus($total)
+function ket_lulus($tiu,$tkp,$twk,$tbi,$tpa)
 {
-	if ($total >= cek_nilai_lulus()) {
+
+	if ($tiu >= cek_nilai_lulus(1) and $tkp >= cek_nilai_lulus(2) and $twk >= cek_nilai_lulus(3) and $tbi >= cek_nilai_lulus(4) and $tpa >= cek_nilai_lulus(5) ) {
 		return "<span class=\"label label-success\">LULUS</span> ";
 	} else {
 		return "<span class=\"label label-danger\">TIDAK LULUS</span> ";
