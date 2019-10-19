@@ -121,8 +121,7 @@
             }
 
                 //ambil data rangking
-                $this->db->order_by('total', 'desc');
-                foreach ($this->db->get('rangking')->result() as $row) {
+                foreach ($this->db->query("SELECT *, sum(tpa+tbi) as tb FROM `rangking` GROUP BY nama ORDER BY tb DESC")->result() as $row) {
                 ?>
                 <tr>
 			<td width="80px"><?php echo ++$start ?></td>
