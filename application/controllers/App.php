@@ -567,6 +567,29 @@ and skor_detail.butir_soal_id=butir_soal.butir_soal_id and skor.user_id='$user_i
 		<?php
 	}
 
+	public function aksi_reset_batch($batch_id, $user_id)
+	{
+		error_reporting(0);
+		//cek paket soal berdasarkan batch id
+		$cek = $this->db->get_where('paket_soal', array('batch_id'=>$batch_id))->row();
+		$paket_soal_id = $cek->paket_soal_id;
+		$skor_id = $this->db->get_where('skor', array('user_id'=>$user_id,'paket_soal_id'=>$paket_soal_id))->row()->skor_id;
+
+		$this->db->where('skor_id', $skor_id);
+		$this->db->delete('skor');
+		$this->db->where('skor_id', $skor_id);
+		$this->db->delete('skor_detail');
+		$this->db->where('user_id', $user_id);
+		$this->db->where('batch_id', $batch_id);
+		$this->db->delete('akses_batch');
+		?>
+		<script type="text/javascript">
+			alert("RESET UJIAN SISWA BERHASIL .!");
+			window.location="<?php echo base_url() ?>app/reset_siswa";
+		</script>
+		<?php
+	}
+
 	public function update_profil()
 	{
 		$user_id = $this->session->userdata('id_user');
