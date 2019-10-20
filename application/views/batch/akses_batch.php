@@ -1,3 +1,5 @@
+<p><a href="app/akses_batch_all/<?php echo $this->uri->segment(3); ?>" class="btn btn-info">Pilih Semua</a>  
+	<a href="app/deleteall_akses_batch/<?php echo $this->uri->segment(3); ?>" class="btn btn-warning">Batal Semua</a></p>
 <table class="table table-bordered tabel-data" style="margin-bottom: 10px">
             <thead>
             <tr>

@@ -255,6 +255,26 @@ class App extends CI_Controller {
     	}
     }
 
+    public function akses_batch_all($batch_id)
+    {
+    	foreach ($this->db->get('user')->result() as $user) {
+    		//select paket
+			$paket = $this->db->get_where('paket_soal', array('batch_id'=>$batch_id));
+			foreach ($paket->result() as $value) {
+				// echo $value->paket_soal_id;
+				$this->db->insert('akses_batch', array('user_id'=>$user->user_id,'batch_id'=>$batch_id,'paket_soal_id'=>$value->paket_soal_id));
+			}
+    	}
+    	redirect('app/akses_batch/'.$batch_id,'refresh');
+    }
+
+    public function deleteall_akses_batch($batch_id)
+    {
+    	$this->db->where('batch_id', $batch_id);
+    	$this->db->delete('akses_batch');
+    	redirect('app/akses_batch/'.$batch_id,'refresh');
+    }
+
     public function delete_akses_batch($user_id,$batch_id)
     {
     	$this->db->where('user_id', $user_id);
